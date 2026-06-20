@@ -340,6 +340,41 @@ body {
   margin: 0 auto 1rem;
 }
 
+.swap-progress {
+  text-align: center;
+}
+
+.swap-progress-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.swap-progress-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.swap-progress-dot--active {
+  background: #2D467B;
+  transform: scale(1.25);
+}
+
+.swap-progress-dot--done {
+  background: #78A5D3;
+}
+
+.swap-progress-label {
+  font-size: 0.8125rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
 .swap-box {
   background: white;
   border-radius: 1.25rem;

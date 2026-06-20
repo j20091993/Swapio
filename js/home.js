@@ -2,6 +2,13 @@
 
 const SWAP_STEPS = ['swap-box-step1', 'offer-preview', 'swap-form-section', 'success-screen'];
 
+const STEP_META = {
+  'swap-box-step1': { num: 1, label: 'Choose your card' },
+  'offer-preview': { num: 2, label: 'Review your offer' },
+  'swap-form-section': { num: 3, label: 'Submit your card' },
+  'success-screen': { num: 4, label: 'Swap submitted' },
+};
+
 let swapState = {
   brand: null,
   balance: null,
@@ -32,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageAnimations();
   initHomeSchema();
   updateGetOfferButton();
+  initBrandFromUrl();
 });
 
 function initHomeSchema() {
@@ -48,12 +56,42 @@ function initHomeSchema() {
   document.head.appendChild(script);
 }
 
+function updateStepIndicator(stepId) {
+  const meta = STEP_META[stepId];
+  const labelEl = document.getElementById('swap-progress-label');
+  if (!meta || !labelEl) return;
+
+  labelEl.textContent = `Step ${meta.num} of 4 — ${meta.label}`;
+
+  document.querySelectorAll('.swap-progress-dot').forEach((dot) => {
+    const stepNum = Number(dot.dataset.step);
+    dot.classList.toggle('swap-progress-dot--active', stepNum === meta.num);
+    dot.classList.toggle('swap-progress-dot--done', stepNum < meta.num);
+  });
+}
+
 function showSwapStep(stepId) {
   SWAP_STEPS.forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.toggle('swap-step-active', id === stepId);
   });
+  updateStepIndicator(stepId);
+}
+
+function initBrandFromUrl() {
+  const brand = new URLSearchParams(window.location.search).get('brand');
+  if (!brand || !SWAPIO.giftCards.includes(brand) || !brandDropdown) return;
+
+  brandDropdown.selectItem(brand);
+  renderCardFields();
+  updateGetOfferButton();
+
+  if (window.location.hash === '#swap') {
+    requestAnimationFrame(() => {
+      document.getElementById('swap')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 }
 
 function initDropdowns() {

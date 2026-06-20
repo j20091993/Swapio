@@ -108,6 +108,13 @@ function scrollToHashTarget() {
   }
 }
 
+function getArticleExcerpt(article) {
+  if (article.excerpt) return article.excerpt;
+  const match = article.content.match(/<p>(.*?)<\/p>/s);
+  if (!match) return article.title;
+  return match[1].replace(/<[^>]+>/g, '').trim().slice(0, 160);
+}
+
 function formatCurrency(amount) {
   const hasCents = Math.round(amount * 100) % 100 !== 0;
   return new Intl.NumberFormat('en-US', {

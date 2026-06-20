@@ -1,10 +1,3 @@
-function getArticleExcerpt(article) {
-  if (article.excerpt) return article.excerpt;
-  const match = article.content.match(/<p>(.*?)<\/p>/s);
-  if (!match) return article.title;
-  return match[1].replace(/<[^>]+>/g, '').trim().slice(0, 160);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   initLayout('articles');
 
