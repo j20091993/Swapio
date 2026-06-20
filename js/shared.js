@@ -149,6 +149,22 @@ function clearSwapSession() {
   sessionStorage.removeItem(SWAP_SESSION_KEY);
 }
 
+function isValidSwapSession(saved) {
+  if (!saved?.offerConfirmed) return false;
+  if (!saved.brand || !SWAPIO.giftCards.includes(saved.brand)) return false;
+  if (!saved.payoutMethod || !SWAPIO.payoutMethods.includes(saved.payoutMethod)) return false;
+
+  const balance = Number(saved.balance);
+  if (!Number.isFinite(balance) || balance < 10 || balance > 5000) return false;
+
+  const expectedPayout = calculatePayout(balance);
+  if (typeof saved.payout !== 'number' || Math.abs(saved.payout - expectedPayout) > 0.01) {
+    return false;
+  }
+
+  return true;
+}
+
 function getHeader(activePage = '') {
   const navItems = [
     { href: '/index.html', label: 'Home', id: 'home' },

@@ -675,6 +675,11 @@ body {
   border-bottom: 1px solid var(--swapio-divider);
 }
 
+.page-hero--plain > div {
+  border-bottom: none;
+  padding-bottom: 1.5rem;
+}
+
 .article-hero {
   padding-top: 2.5rem;
 }
@@ -706,7 +711,7 @@ body {
   }
 
   .site-header-inner::after,
-  .page-hero > div::after,
+  .page-hero:not(.page-hero--plain) > div::after,
   .contained-divider-top::before {
     content: '';
     position: absolute;
@@ -718,7 +723,7 @@ body {
   }
 
   .site-header-inner::after,
-  .page-hero > div::after {
+  .page-hero:not(.page-hero--plain) > div::after {
     bottom: 0;
   }
 

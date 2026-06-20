@@ -58,30 +58,19 @@ function getSwapSteps() {
   return document.body.dataset.page === 'sell' ? SWAP_STEPS_SELL : SWAP_STEPS_HOME;
 }
 
-const SWAP_STEP_TITLES = {
-  'swap-box-step1': 'Start Your Swap',
-  'offer-preview': 'Your Cash Offer',
-};
-
-function updateSwapStepTitle(stepId) {
-  const titleEl = document.getElementById('swap-step-title');
-  if (!titleEl) return;
-  titleEl.textContent = SWAP_STEP_TITLES[stepId] || SWAP_STEP_TITLES['swap-box-step1'];
-}
-
 function showSwapStep(stepId) {
   getSwapSteps().forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
     el.classList.toggle('swap-step-active', id === stepId);
   });
-  updateSwapStepTitle(stepId);
 }
 
 function initSellPage() {
   const saved = loadSwapSession();
-  if (!saved?.brand || !saved?.balance || !saved?.payoutMethod) {
-    window.location.href = '/index.html#swap';
+  if (!isValidSwapSession(saved)) {
+    clearSwapSession();
+    window.location.replace('/index.html#swap');
     return;
   }
 
@@ -281,6 +270,8 @@ function initSwapFlow() {
   getOfferBtn?.addEventListener('click', () => {
     if (!validateSwapSelection()) return;
 
+    clearSwapSession();
+
     const payout = calculatePayout(swapState.balance);
 
     document.getElementById('preview-card').textContent =
@@ -294,11 +285,14 @@ function initSwapFlow() {
   });
 
   continueBtn?.addEventListener('click', () => {
+    if (!validateSwapSelection()) return;
+
     saveSwapSession({
       brand: swapState.brand,
       balance: swapState.balance,
       payoutMethod: swapState.payoutMethod,
       payout: calculatePayout(swapState.balance),
+      offerConfirmed: true,
     });
     window.location.href = '/sell-gift-card/';
   });
