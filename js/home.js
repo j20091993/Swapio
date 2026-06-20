@@ -68,10 +68,7 @@ function initDropdowns() {
       listEl: brandList,
       items: SWAPIO.giftCards,
       getValue: () => swapState.brand,
-      setValue: (v) => {
-        swapState.brand = v;
-        showBrandHint();
-      },
+      setValue: (v) => { swapState.brand = v; },
       onSelect: () => {
         renderCardFields();
         updateGetOfferButton();
@@ -93,21 +90,6 @@ function initDropdowns() {
   }
 }
 
-function showBrandHint() {
-  const el = document.getElementById('brand-hint');
-  if (!el) return;
-
-  if (!swapState.brand) {
-    el.classList.add('hidden');
-    el.textContent = '';
-    return;
-  }
-
-  const req = getCardRequirements(swapState.brand);
-  el.textContent = req.hint || '';
-  el.classList.toggle('hidden', !req.hint);
-}
-
 function renderCardFields() {
   const container = document.getElementById('card-fields-container');
   if (!container || !swapState.brand) {
@@ -117,9 +99,7 @@ function renderCardFields() {
 
   const req = getCardRequirements(swapState.brand);
   container.innerHTML = `
-    <p class="text-xs text-swapio-dark/70 font-medium mb-2">${req.label} details required</p>
-    ${req.hint ? `<p class="brand-hint mb-3">${req.hint}</p>` : ''}
-    ${req.note ? `<p class="brand-note mb-3">${req.note}</p>` : ''}
+    <p class="text-xs text-swapio-dark/70 font-medium mb-3">${req.label} details required</p>
     ${req.fields.map((field) => `
       <div class="field-wrapper">
         <label class="form-label" for="card-${field.name}">${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
@@ -202,8 +182,6 @@ function initSwapFlow() {
       `You receive ${SWAPIO.payoutPercent}% of your card value`;
 
     document.getElementById('form-payout-method').value = swapState.payoutMethod;
-    document.getElementById('form-card-summary').textContent =
-      `${swapState.brand} — ${formatCurrency(swapState.balance)} → ${formatCurrency(payout)} via ${swapState.payoutMethod}`;
 
     renderCardFields();
     renderPayoutFields();
@@ -286,7 +264,6 @@ function resetSwapFlow() {
   document.getElementById('card-fields-container').innerHTML = '';
   document.getElementById('payout-fields-container').innerHTML = '';
   document.getElementById('form-error')?.classList.add('hidden');
-  showBrandHint();
   hideError();
   updateGetOfferButton();
   showSwapStep('swap-box-step1');

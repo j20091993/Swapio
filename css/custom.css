@@ -56,34 +56,15 @@ body {
   justify-content: center;
   align-items: flex-start;
   gap: 2.5rem 4rem;
-  max-width: 42rem;
+  max-width: 26rem;
   margin: 0 auto;
 }
 
 @media (min-width: 480px) {
   .footer-links {
     gap: 2.5rem 5rem;
-    max-width: 44rem;
+    max-width: 26rem;
   }
-}
-
-.brand-hint {
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: #4b5563;
-  padding: 0.75rem 1rem;
-  background: #F8FAFC;
-  border: 1px solid rgba(45, 70, 123, 0.1);
-  border-radius: 0.75rem;
-}
-
-.brand-note {
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: #2D467B;
-  padding: 0.625rem 0.875rem;
-  background: rgba(120, 165, 211, 0.12);
-  border-radius: 0.625rem;
 }
 
 .mobile-menu-body-lock {

@@ -190,14 +190,6 @@ function getFooter() {
           </div>
 
           <div class="footer-col">
-            <h4 class="footer-heading">Support</h4>
-            <ul class="footer-list">
-              <li><a href="mailto:${SWAPIO.supportEmail}" class="footer-link">${SWAPIO.supportEmail}</a></li>
-              <li><a href="contact.html" class="footer-link">Send a Message</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
             <h4 class="footer-heading">Legal</h4>
             <ul class="footer-list">
               <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
@@ -207,9 +199,7 @@ function getFooter() {
         </div>
 
         <div class="footer-copy mt-8 sm:mt-10 pt-6 sm:pt-8 text-center">
-          <p class="text-sm text-white/70 mb-1">Swapio — Gift Card to Cash</p>
-          <p class="text-sm text-white/50">Support: <a href="mailto:${SWAPIO.supportEmail}" class="footer-link">${SWAPIO.supportEmail}</a></p>
-          <p class="text-sm text-white/50 mt-2">&copy; ${new Date().getFullYear()} Swapio. All rights reserved.</p>
+          <p class="text-sm text-white/50">&copy; ${new Date().getFullYear()} Swapio. All rights reserved.</p>
         </div>
       </div>
     </footer>
