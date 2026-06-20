@@ -40,7 +40,7 @@ const ARTICLES = {
       <p>A trustworthy platform shows your payout amount before you commit. Hidden fees or unclear rates are red flags. Swapio displays your exact cash offer — including the 5% service fee — before you submit anything.</p>
 
       <h2>Secure submission</h2>
-      <p>Look for HTTPS encryption on every page, especially the submission form. Your card number, PIN, and payout details should be transmitted securely. Swapio processes all submissions over encrypted connections via Cloudflare's infrastructure.</p>
+      <p>Look for HTTPS encryption on every page, especially the submission form. Your card number, PIN, and payout details should be transmitted securely. Swapio processes all submissions over encrypted HTTPS connections.</p>
 
       <h2>Real cash payouts</h2>
       <p>Verify that the platform pays via established methods — PayPal, Cash App, Zelle, or bank transfer. You should receive money in your account, not vague "credits" or points.</p>
