@@ -1,5 +1,13 @@
 /* Reusable searchable dropdown */
 
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 function initSearchableDropdown({
   inputEl,
   listEl,
@@ -38,7 +46,7 @@ function initSearchableDropdown({
     listEl.innerHTML = filtered
       .map(
         (item) =>
-          `<div class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}="${item}">${item}</div>`
+          `<div class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}="${escapeHtml(item)}">${escapeHtml(item)}</div>`
       )
       .join('');
 

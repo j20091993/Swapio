@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Page not found — Swapio">
+  <title>Page Not Found — Swapio</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'swapio-dark': '#2D467B',
+            'swapio-light': '#78A5D3',
+            'swapio-bg': '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="text-gray-800" data-page="">
+
+  <div id="site-header"></div>
+
+  <section class="py-24 text-center page-enter">
+    <div class="max-w-lg mx-auto px-4">
+      <h1 class="text-3xl font-bold text-swapio-dark">Page not found</h1>
+      <p class="text-gray-500 mt-4">The page you're looking for doesn't exist or has been moved.</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+        <a href="index.html" class="btn-primary">Go Home</a>
+        <a href="index.html#swap" class="btn-secondary">Start a Swap</a>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="/js/shared.js"></script>
+  <script src="/js/pages.js"></script>
+</body>
+</html>

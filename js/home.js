@@ -10,6 +10,8 @@ let swapState = {
 
 let brandDropdown;
 let payoutDropdown;
+let isSubmitting = false;
+
 document.addEventListener('DOMContentLoaded', () => {
   initLayout('home');
   initDropdowns();
@@ -29,7 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (processEl) processEl.innerHTML = getProcessSteps();
 
   initPageAnimations();
+  initHomeSchema();
 });
+
+function initHomeSchema() {
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Swapio',
+    url: getSiteOrigin(),
+    description: 'Turn unused gift cards into cash fast. 95% payout, 60+ brands accepted.',
+    publisher: { '@type': 'Organization', name: 'Swapio' },
+  });
+  document.head.appendChild(script);
+}
 
 function showSwapStep(stepId) {
   SWAP_STEPS.forEach((id) => {
@@ -51,7 +68,10 @@ function initDropdowns() {
       listEl: brandList,
       items: SWAPIO.giftCards,
       getValue: () => swapState.brand,
-      setValue: (v) => { swapState.brand = v; },
+      setValue: (v) => {
+        swapState.brand = v;
+        showBrandHint();
+      },
       onSelect: () => {
         renderCardFields();
         updateGetOfferButton();
@@ -73,6 +93,21 @@ function initDropdowns() {
   }
 }
 
+function showBrandHint() {
+  const el = document.getElementById('brand-hint');
+  if (!el) return;
+
+  if (!swapState.brand) {
+    el.classList.add('hidden');
+    el.textContent = '';
+    return;
+  }
+
+  const req = getCardRequirements(swapState.brand);
+  el.textContent = req.hint || '';
+  el.classList.toggle('hidden', !req.hint);
+}
+
 function renderCardFields() {
   const container = document.getElementById('card-fields-container');
   if (!container || !swapState.brand) {
@@ -82,7 +117,9 @@ function renderCardFields() {
 
   const req = getCardRequirements(swapState.brand);
   container.innerHTML = `
-    <p class="text-xs text-swapio-dark/70 font-medium mb-3">${req.label} details required</p>
+    <p class="text-xs text-swapio-dark/70 font-medium mb-2">${req.label} details required</p>
+    ${req.hint ? `<p class="brand-hint mb-3">${req.hint}</p>` : ''}
+    ${req.note ? `<p class="brand-note mb-3">${req.note}</p>` : ''}
     ${req.fields.map((field) => `
       <div class="field-wrapper">
         <label class="form-label" for="card-${field.name}">${field.label}${field.required ? ' <span class="text-red-500">*</span>' : ''}</label>
@@ -108,7 +145,15 @@ function renderPayoutFields() {
   }
 
   const fields = getPayoutFields(swapState.payoutMethod);
-  container.innerHTML = fields.map((field) => `
+  container.innerHTML = fields.map((field) => {
+    const validateType = field.type === 'email' ? 'email' : field.type === 'bitcoin' ? 'bitcoin' : 'required';
+    const errorMessage = field.type === 'email'
+      ? 'Please enter valid email'
+      : field.type === 'bitcoin'
+        ? 'Please enter a valid Bitcoin address (bc1, 1, or 3 format)'
+        : `Please enter ${field.label.toLowerCase()}`;
+
+    return `
     <div class="field-wrapper">
       <label class="form-label" for="payout-${field.name}">${field.label} <span class="text-red-500">*</span></label>
       <input
@@ -117,18 +162,20 @@ function renderPayoutFields() {
         name="${field.name}"
         class="form-input"
         placeholder="${field.placeholder}"
-        data-validate="${field.type === 'email' ? 'email' : 'required'}"
-        data-error-message="${field.type === 'email' ? 'Please enter valid email' : `Please enter ${field.label.toLowerCase()}`}"
+        data-validate="${validateType}"
+        data-error-message="${errorMessage}"
         ${field.inputMode || field.type === 'email' ? `inputmode="${field.inputMode || 'email'}"` : ''}
+        ${field.type === 'bitcoin' ? 'autocapitalize="off" autocorrect="off" spellcheck="false"' : ''}
       >
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   fields.forEach((field) => {
-    if (field.type === 'email') {
-      const el = document.getElementById(`payout-${field.name}`);
-      if (el) setupEmailValidation(el);
-    }
+    const el = document.getElementById(`payout-${field.name}`);
+    if (!el) return;
+    if (field.type === 'email') setupEmailValidation(el);
+    if (field.type === 'bitcoin') setupBitcoinValidation(el);
   });
 }
 
@@ -238,6 +285,8 @@ function resetSwapFlow() {
   document.getElementById('submission-form').reset();
   document.getElementById('card-fields-container').innerHTML = '';
   document.getElementById('payout-fields-container').innerHTML = '';
+  document.getElementById('form-error')?.classList.add('hidden');
+  showBrandHint();
   hideError();
   updateGetOfferButton();
   showSwapStep('swap-box-step1');
@@ -287,10 +336,14 @@ function initSubmissionForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
     if (!validateFormFields(form)) return;
+
+    document.getElementById('form-error')?.classList.add('hidden');
 
     const submitBtn = document.getElementById('submit-btn');
     const originalText = submitBtn.innerHTML;
+    isSubmitting = true;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
 
@@ -327,10 +380,13 @@ function initSubmissionForm() {
     } catch (err) {
       showFormError(err.message);
     } finally {
+      isSubmitting = false;
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
     }
   });
+
+  document.getElementById('start-another-swap')?.addEventListener('click', resetSwapFlow);
 }
 
 function showFormError(msg) {

@@ -1,9 +1,16 @@
 /* Form validation utilities */
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const BTC_LEGACY_REGEX = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
+const BTC_BECH32_REGEX = /^bc1[a-z0-9]{25,89}$/i;
 
 function isValidEmail(email) {
   return EMAIL_REGEX.test(String(email).trim());
+}
+
+function isValidBitcoinAddress(address) {
+  const trimmed = String(address).trim();
+  return BTC_LEGACY_REGEX.test(trimmed) || BTC_BECH32_REGEX.test(trimmed);
 }
 
 function setupEmailValidation(inputEl, errorMessage = 'Please enter valid email') {
@@ -31,6 +38,50 @@ function setupEmailValidation(inputEl, errorMessage = 'Please enter valid email'
     }
 
     if (!isValidEmail(value)) {
+      setFieldError(inputEl, errorMessage);
+      return false;
+    }
+
+    clearFieldError(inputEl);
+    return true;
+  }
+
+  inputEl.addEventListener('blur', () => {
+    if (inputEl.value.trim()) validate(false);
+  });
+
+  inputEl.addEventListener('input', () => {
+    if (inputEl.classList.contains('form-input-invalid')) validate(false);
+  });
+
+  return (requireValue = true) => validate(requireValue);
+}
+
+function setupBitcoinValidation(inputEl, errorMessage = 'Please enter a valid Bitcoin address') {
+  const wrapper = inputEl.closest('.field-wrapper') || createFieldWrapper(inputEl);
+  let errorEl = wrapper.querySelector('.field-error');
+
+  if (!errorEl) {
+    errorEl = document.createElement('p');
+    errorEl.className = 'field-error hidden';
+    wrapper.appendChild(errorEl);
+  }
+
+  errorEl.textContent = errorMessage;
+
+  function validate(requireValue = false) {
+    const value = inputEl.value.trim();
+
+    if (!value) {
+      if (requireValue) {
+        setFieldError(inputEl, 'Please enter your Bitcoin address');
+        return false;
+      }
+      clearFieldError(inputEl);
+      return false;
+    }
+
+    if (!isValidBitcoinAddress(value)) {
       setFieldError(inputEl, errorMessage);
       return false;
     }
@@ -123,6 +174,17 @@ function validateFormFields(formEl) {
     } else if (type === 'required') {
       if (!input.value.trim()) {
         setFieldError(input, input.dataset.errorMessage || 'Please fill out this field');
+        valid = false;
+      } else {
+        clearFieldError(input);
+      }
+    } else if (type === 'bitcoin') {
+      const value = input.value.trim();
+      if (!value) {
+        setFieldError(input, 'Please enter your Bitcoin address');
+        valid = false;
+      } else if (!isValidBitcoinAddress(value)) {
+        setFieldError(input, input.dataset.errorMessage || 'Please enter a valid Bitcoin address');
         valid = false;
       } else {
         clearFieldError(input);

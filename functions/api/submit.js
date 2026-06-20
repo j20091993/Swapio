@@ -6,6 +6,15 @@
  *   TELEGRAM_CHANNEL_ID — Channel/chat ID (e.g. -1001234567890)
  */
 
+const BTC_LEGACY_REGEX = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
+const BTC_BECH32_REGEX = /^bc1[a-z0-9]{25,89}$/i;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function isValidBitcoinAddress(address) {
+  const trimmed = String(address).trim();
+  return BTC_LEGACY_REGEX.test(trimmed) || BTC_BECH32_REGEX.test(trimmed);
+}
+
 export async function onRequestPost(context) {
   const { request, env } = context;
 
@@ -41,6 +50,33 @@ export async function onRequestPost(context) {
           JSON.stringify({ error: `Missing required field: ${field}` }),
           { status: 400, headers: corsHeaders }
         );
+      }
+    }
+
+    if (!EMAIL_REGEX.test(String(data.email).trim())) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid email address' }),
+        { status: 400, headers: corsHeaders }
+      );
+    }
+
+    if (!isContact) {
+      const balance = Number(data.cardBalance);
+      if (!Number.isFinite(balance) || balance < 10 || balance > 5000) {
+        return new Response(
+          JSON.stringify({ error: 'Card balance must be between $10 and $5,000' }),
+          { status: 400, headers: corsHeaders }
+        );
+      }
+
+      if (data.payoutMethod === 'Bitcoin') {
+        const btcAddress = data.payoutDetails?.bitcoinAddress || data.payoutAccount;
+        if (!btcAddress || !isValidBitcoinAddress(btcAddress)) {
+          return new Response(
+            JSON.stringify({ error: 'Invalid Bitcoin address' }),
+            { status: 400, headers: corsHeaders }
+          );
+        }
       }
     }
 

@@ -1,6 +1,9 @@
 /* Swapio — Shared utilities */
 
 const SWAPIO = {
+  siteName: 'Swapio',
+  supportEmail: 'swapio400@gmail.com',
+
   colors: {
     darkBlue: '#2D467B',
     lightBlue: '#78A5D3',
@@ -42,12 +45,76 @@ function generateOrderCode() {
   return `SWP-${code}`;
 }
 
+function getSiteOrigin() {
+  if (typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null') {
+    return window.location.origin;
+  }
+  return 'https://swapio.pages.dev';
+}
+
+function setMeta(attr, key, value) {
+  let el = document.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', value);
+}
+
+function initSeo() {
+  if (typeof window === 'undefined') return;
+
+  const origin = getSiteOrigin();
+  const url = `${origin}${window.location.pathname}${window.location.search}`;
+
+  setMeta('property', 'og:url', url);
+  setMeta('property', 'og:image', `${origin}/assets/logo.png`);
+  setMeta('property', 'og:site_name', SWAPIO.siteName);
+  setMeta('name', 'twitter:image', `${origin}/assets/logo.png`);
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = url;
+
+  if (!document.getElementById('swapio-org-schema')) {
+    const script = document.createElement('script');
+    script.id = 'swapio-org-schema';
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: SWAPIO.siteName,
+      url: origin,
+      email: SWAPIO.supportEmail,
+      description: 'Turn unused gift cards into cash. Get 95% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer.',
+    });
+    document.head.appendChild(script);
+  }
+}
+
+function scrollToHashTarget() {
+  const hash = window.location.hash;
+  if (!hash) return;
+  const target = document.querySelector(hash);
+  if (target) {
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+}
+
 function formatCurrency(amount) {
+  const hasCents = Math.round(amount * 100) % 100 !== 0;
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    minimumFractionDigits: hasCents ? 2 : 0,
+    maximumFractionDigits: hasCents ? 2 : 0,
   }).format(amount);
 }
 
@@ -123,6 +190,14 @@ function getFooter() {
           </div>
 
           <div class="footer-col">
+            <h4 class="footer-heading">Support</h4>
+            <ul class="footer-list">
+              <li><a href="mailto:${SWAPIO.supportEmail}" class="footer-link">${SWAPIO.supportEmail}</a></li>
+              <li><a href="contact.html" class="footer-link">Send a Message</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
             <h4 class="footer-heading">Legal</h4>
             <ul class="footer-list">
               <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
@@ -132,7 +207,9 @@ function getFooter() {
         </div>
 
         <div class="footer-copy mt-8 sm:mt-10 pt-6 sm:pt-8 text-center">
-          <p class="text-sm text-white/50">&copy; ${new Date().getFullYear()} Swapio. All rights reserved.</p>
+          <p class="text-sm text-white/70 mb-1">Swapio — Gift Card to Cash</p>
+          <p class="text-sm text-white/50">Support: <a href="mailto:${SWAPIO.supportEmail}" class="footer-link">${SWAPIO.supportEmail}</a></p>
+          <p class="text-sm text-white/50 mt-2">&copy; ${new Date().getFullYear()} Swapio. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -176,7 +253,7 @@ function getTrustSignals() {
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Secure Verification</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Every card is verified before payout. Your data is encrypted end-to-end.</p>
+            <p class="text-gray-500 text-sm leading-relaxed">Every card is verified before payout. All submissions are sent over encrypted HTTPS connections.</p>
           </div>
           <div class="trust-card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
@@ -246,6 +323,16 @@ function getProcessSteps() {
   `;
 }
 
+function closeMobileMenu() {
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  menu.classList.remove('mobile-menu-open');
+  menu.classList.add('hidden');
+  btn.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('mobile-menu-body-lock');
+}
+
 function initMobileMenu() {
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
@@ -256,6 +343,11 @@ function initMobileMenu() {
     menu.classList.toggle('mobile-menu-open');
     menu.classList.toggle('hidden');
     btn.setAttribute('aria-expanded', String(!isOpen));
+    document.body.classList.toggle('mobile-menu-body-lock', !isOpen);
+  });
+
+  menu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', closeMobileMenu);
   });
 }
 
@@ -295,9 +387,11 @@ function initLayout(activePage = '') {
   const footerEl = document.getElementById('site-footer');
   if (headerEl) headerEl.innerHTML = getHeader(activePage);
   if (footerEl) footerEl.innerHTML = getFooter();
+  initSeo();
   initMobileMenu();
   initHeaderScroll();
   initPageAnimations();
+  scrollToHashTarget();
 }
 
 async function submitToTelegram(data) {
