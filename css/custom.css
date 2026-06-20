@@ -676,15 +676,13 @@ body {
   .site-header-inner,
   .page-hero > div,
   .stats-bar-inner,
-  .contained-divider-top,
-  .mobile-menu-inner {
+  .contained-divider-top {
     border-color: transparent;
   }
 
   .site-header-inner::after,
   .page-hero > div::after,
-  .contained-divider-top::before,
-  .mobile-menu-inner::before {
+  .contained-divider-top::before {
     content: '';
     position: absolute;
     left: var(--swapio-divider-inset);
@@ -699,8 +697,7 @@ body {
     bottom: 0;
   }
 
-  .contained-divider-top::before,
-  .mobile-menu-inner::before {
+  .contained-divider-top::before {
     top: 0;
   }
 

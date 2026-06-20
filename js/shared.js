@@ -92,7 +92,7 @@ function getHeader(activePage = '') {
       </div>
 
       <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-white">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t site-divider mobile-menu-inner">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav class="flex flex-col py-4 gap-2" aria-label="Mobile navigation">
           ${navItems
             .map(
