@@ -76,8 +76,8 @@ function getHeader(activePage = '') {
     .join('');
 
   return `
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b site-divider transition-shadow duration-300">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <header class="site-header sticky top-0 z-50 bg-white/90 backdrop-blur-md transition-shadow duration-300">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
         <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
             ${navLinks}
@@ -91,8 +91,9 @@ function getHeader(activePage = '') {
         </div>
       </div>
 
-      <div id="mobile-menu" class="mobile-menu hidden md:hidden border-t site-divider bg-white">
-        <nav class="flex flex-col px-4 py-4 gap-2" aria-label="Mobile navigation">
+      <div id="mobile-menu" class="mobile-menu hidden md:hidden bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 border-t site-divider">
+        <nav class="flex flex-col py-4 gap-2" aria-label="Mobile navigation">
           ${navItems
             .map(
               (item) =>
@@ -100,6 +101,7 @@ function getHeader(activePage = '') {
             )
             .join('')}
         </nav>
+        </div>
       </div>
     </header>
   `;
@@ -107,29 +109,29 @@ function getHeader(activePage = '') {
 
 function getFooter() {
   return `
-    <footer class="bg-swapio-dark text-white">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <h4 class="font-semibold mb-4 text-white/90">Explore</h4>
-            <ul class="space-y-2 text-sm text-white/70">
-              <li><a href="process.html" class="hover:text-white transition-colors">The Process</a></li>
-              <li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li>
-              <li><a href="articles.html" class="hover:text-white transition-colors">Articles</a></li>
-              <li><a href="contact.html" class="hover:text-white transition-colors">Reach Us</a></li>
+    <footer class="site-footer bg-swapio-dark text-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4 class="footer-heading">Explore</h4>
+            <ul class="footer-list">
+              <li><a href="process.html" class="footer-link">The Process</a></li>
+              <li><a href="faq.html" class="footer-link">FAQ</a></li>
+              <li><a href="articles.html" class="footer-link">Articles</a></li>
+              <li><a href="contact.html" class="footer-link">Reach Us</a></li>
             </ul>
           </div>
 
-          <div>
-            <h4 class="font-semibold mb-4 text-white/90">Legal</h4>
-            <ul class="space-y-2 text-sm text-white/70">
-              <li><a href="terms.html" class="hover:text-white transition-colors">Terms of Service</a></li>
-              <li><a href="privacy.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+          <div class="footer-col">
+            <h4 class="footer-heading">Legal</h4>
+            <ul class="footer-list">
+              <li><a href="terms.html" class="footer-link">Terms of Service</a></li>
+              <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="border-t border-white/10 mt-10 pt-8 text-center">
+        <div class="footer-copy mt-8 sm:mt-10 pt-6 sm:pt-8 text-center">
           <p class="text-sm text-white/50">&copy; ${new Date().getFullYear()} Swapio. All rights reserved.</p>
         </div>
       </div>
@@ -139,8 +141,8 @@ function getFooter() {
 
 function getStatsBar() {
   return `
-    <section class="bg-white border-y site-divider">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <section class="stats-bar bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 stats-bar-inner">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
           <div>
             <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.cardsSwapped}</p>
