@@ -18,7 +18,6 @@ function initSearchableDropdown({
   dataAttr = 'value',
 }) {
   let highlightedIndex = -1;
-  let isScrolling = false;
 
   const wrapper = inputEl.closest('.dropdown-wrapper');
   const fieldEl = wrapper?.parentElement;
@@ -45,10 +44,12 @@ function initSearchableDropdown({
 
     listEl.innerHTML = filtered
       .map(
-        (item) =>
-          `<div class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}="${escapeHtml(item)}">${escapeHtml(item)}</div>`
+        (item, index) =>
+          `<div class="dropdown-item${selected === item ? ' selected' : ''}" data-${dataAttr}-index="${index}">${escapeHtml(item)}</div>`
       )
       .join('');
+
+    listEl._filteredItems = filtered;
 
     listEl.classList.add('open');
     setOpenState(true);
@@ -85,32 +86,22 @@ function initSearchableDropdown({
     renderList(inputEl.value);
   });
 
+  function getItemFromEvent(e) {
+    const item = e.target.closest(`.dropdown-item[data-${dataAttr}-index]`);
+    if (!item || item.classList.contains('dropdown-empty')) return null;
+    const index = Number(item.getAttribute(`data-${dataAttr}-index`));
+    return listEl._filteredItems?.[index] ?? null;
+  }
+
   listEl.addEventListener('click', (e) => {
-    const item = e.target.closest(`.dropdown-item[data-${dataAttr}]`);
-    if (item) selectItem(item.dataset[dataAttr]);
+    const value = getItemFromEvent(e);
+    if (value) selectItem(value);
   });
 
   listEl.addEventListener('mousedown', (e) => e.preventDefault());
 
-  listEl.addEventListener('touchstart', () => {
-    isScrolling = false;
-  }, { passive: true });
-
-  listEl.addEventListener('touchmove', () => {
-    isScrolling = true;
-  }, { passive: true });
-
-  listEl.addEventListener('touchend', (e) => {
-    if (isScrolling) return;
-    const item = e.target.closest(`.dropdown-item[data-${dataAttr}]`);
-    if (item) {
-      e.preventDefault();
-      selectItem(item.dataset[dataAttr]);
-    }
-  });
-
   inputEl.addEventListener('keydown', (e) => {
-    const optionItems = listEl.querySelectorAll(`.dropdown-item[data-${dataAttr}]`);
+    const optionItems = listEl.querySelectorAll(`.dropdown-item[data-${dataAttr}-index]`);
     if (!optionItems.length) return;
 
     if (e.key === 'ArrowDown') {
@@ -126,7 +117,8 @@ function initSearchableDropdown({
       optionItems[highlightedIndex]?.scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Enter' && highlightedIndex >= 0) {
       e.preventDefault();
-      selectItem(optionItems[highlightedIndex].dataset[dataAttr]);
+      const value = listEl._filteredItems?.[highlightedIndex];
+      if (value) selectItem(value);
     } else if (e.key === 'Escape') {
       closeList();
     }

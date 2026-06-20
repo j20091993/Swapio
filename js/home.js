@@ -10,7 +10,6 @@ let swapState = {
 
 let brandDropdown;
 let payoutDropdown;
-let isSubmitting = false;
 
 document.addEventListener('DOMContentLoaded', () => {
   initLayout('home');
@@ -68,7 +67,10 @@ function initDropdowns() {
       listEl: brandList,
       items: SWAPIO.giftCards,
       getValue: () => swapState.brand,
-      setValue: (v) => { swapState.brand = v; },
+      setValue: (v) => {
+        swapState.brand = v;
+        updateGetOfferButton();
+      },
       onSelect: () => {
         renderCardFields();
         updateGetOfferButton();
@@ -83,7 +85,10 @@ function initDropdowns() {
       listEl: payoutList,
       items: SWAPIO.payoutMethods,
       getValue: () => swapState.payoutMethod,
-      setValue: (v) => { swapState.payoutMethod = v; },
+      setValue: (v) => {
+        swapState.payoutMethod = v;
+        updateGetOfferButton();
+      },
       onSelect: () => updateGetOfferButton(),
       dataAttr: 'payout',
     });
@@ -163,10 +168,14 @@ function initSwapFlow() {
   const getOfferBtn = document.getElementById('get-offer-btn');
   const continueBtn = document.getElementById('continue-btn');
 
-  balanceInput?.addEventListener('input', () => {
+  const syncBalance = () => {
     swapState.balance = parseFloat(balanceInput.value) || null;
     updateGetOfferButton();
-  });
+  };
+
+  balanceInput?.addEventListener('input', syncBalance);
+  balanceInput?.addEventListener('change', syncBalance);
+  balanceInput?.addEventListener('blur', syncBalance);
 
   getOfferBtn?.addEventListener('click', () => {
     if (!validateSwapSelection()) return;
@@ -224,12 +233,14 @@ function validateSwapSelection() {
 function updateGetOfferButton() {
   const btn = document.getElementById('get-offer-btn');
   if (!btn) return;
+  const balance = parseFloat(document.getElementById('balance-input')?.value);
   const valid =
     swapState.brand &&
-    parseFloat(document.getElementById('balance-input')?.value) >= 10 &&
-    parseFloat(document.getElementById('balance-input')?.value) <= 5000 &&
+    balance >= 10 &&
+    balance <= 5000 &&
     swapState.payoutMethod;
-  btn.disabled = !valid;
+  btn.disabled = false;
+  btn.setAttribute('aria-disabled', String(!valid));
 }
 
 function showError(msg) {
@@ -312,14 +323,12 @@ function initSubmissionForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (isSubmitting) return;
     if (!validateFormFields(form)) return;
 
     document.getElementById('form-error')?.classList.add('hidden');
 
     const submitBtn = document.getElementById('submit-btn');
     const originalText = submitBtn.innerHTML;
-    isSubmitting = true;
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
 
@@ -356,7 +365,6 @@ function initSubmissionForm() {
     } catch (err) {
       showFormError(err.message);
     } finally {
-      isSubmitting = false;
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
     }
