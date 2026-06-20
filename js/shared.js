@@ -259,12 +259,25 @@ function initMobileMenu() {
   });
 }
 
+function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  const onScroll = () => {
+    header.classList.toggle('site-header--scrolled', window.scrollY > 8);
+  };
+
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+
 function initLayout(activePage = '') {
   const headerEl = document.getElementById('site-header');
   const footerEl = document.getElementById('site-footer');
   if (headerEl) headerEl.innerHTML = getHeader(activePage);
   if (footerEl) footerEl.innerHTML = getFooter();
   initMobileMenu();
+  initHeaderScroll();
 }
 
 async function submitToTelegram(data) {

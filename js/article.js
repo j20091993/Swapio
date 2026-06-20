@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
     article.title
   );
 
-  document.getElementById('article-category').textContent = article.category;
   document.getElementById('article-title').textContent = article.title;
   document.getElementById('article-read-time').textContent = article.readTime;
   document.getElementById('article-body').innerHTML = article.content;
