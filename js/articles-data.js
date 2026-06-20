@@ -183,4 +183,103 @@ const ARTICLES = {
       <p>A quick afternoon of decluttering could put real cash in your account by evening — even a $10 card pays out $9.50. Start with the card closest to you right now.</p>
     `,
   },
+
+  'sell-amazon-gift-card-for-cash': {
+    title: 'How to Sell an Amazon Gift Card for Cash',
+    category: 'Guide',
+    readTime: '5 min read',
+    gradient: 'from-swapio-dark to-swapio-light',
+    content: `
+      <p>Amazon gift cards are the most swapped brand on Swapio — and for good reason. They're easy to verify, widely available, and balances from $10 to $5,000 are accepted. If you have an unused Amazon card, here's how to turn it into real cash.</p>
+
+      <h2>What you'll need</h2>
+      <ul>
+        <li>Your Amazon claim code (from email or the back of a physical card)</li>
+        <li>The current balance on the card</li>
+        <li>A payout method — PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer</li>
+        <li>A valid email for order updates</li>
+      </ul>
+
+      <h2>Step-by-step on Swapio</h2>
+      <p>Search "Amazon" on the homepage, enter your balance, and pick how you want to get paid. You'll see your exact cash offer instantly — 95% of your card value with our 5% fee shown upfront. Submit your claim code, and you'll receive an order code (SWP-XXXXXX) right away.</p>
+
+      <h2>How much will you get?</h2>
+      <p>A $100 Amazon card pays out $95. A $50 card pays $47.50. The rate is the same regardless of payout method — what changes is how fast the money lands in your account. PayPal, Venmo, and Cash App are usually fastest; bank transfers may take a bit longer.</p>
+
+      <h2>Common mistakes to avoid</h2>
+      <ul>
+        <li>Entering the wrong claim code format — double-check for typos</li>
+        <li>Submitting a card that's already been redeemed</li>
+        <li>Using a payout account that doesn't match your details</li>
+      </ul>
+
+      <p>Ready to swap? Head to the <a href="index.html#swap">homepage</a> and search for Amazon to get started.</p>
+    `,
+  },
+
+  'venmo-bitcoin-payouts': {
+    title: 'Getting Paid via Venmo or Bitcoin on Swapio',
+    category: 'Payouts',
+    readTime: '4 min read',
+    gradient: 'from-swapio-light to-swapio-dark/60',
+    content: `
+      <p>Swapio now supports Venmo and Bitcoin alongside PayPal, Cash App, Zelle, and bank transfer. Same 95% payout rate — just pick the method that fits how you actually use money.</p>
+
+      <h2>Venmo payouts</h2>
+      <p><strong>Best for:</strong> Anyone who already sends and receives money through Venmo daily.</p>
+      <p>When you select Venmo at checkout, you'll enter the phone number linked to your Venmo account. Once your gift card is verified, we send your payout directly to that number. Most Venmo transfers complete within a few hours of verification.</p>
+      <p>Double-check your phone number before submitting — a typo means a delay while we sort it out with you.</p>
+
+      <h2>Bitcoin payouts</h2>
+      <p><strong>Best for:</strong> Users who prefer crypto, want to hold BTC, or don't use traditional payment apps.</p>
+      <p>Select Bitcoin as your payout method and paste your wallet address. We send the USD equivalent of your offer to that address after verification. Make sure you're using the correct network and address type for your wallet — Bitcoin transactions can't be reversed if sent to the wrong place.</p>
+
+      <h2>Does the payout amount change?</h2>
+      <p>No. Whether you choose Venmo, Bitcoin, PayPal, or any other method, you still receive 95% of your verified card balance. The 5% service fee is the same across all payout options.</p>
+
+      <h2>Which should you pick?</h2>
+      <ul>
+        <li><strong>Venmo</strong> — fastest if you live on Venmo already</li>
+        <li><strong>Bitcoin</strong> — best if you want crypto or prefer not to link a bank app</li>
+        <li><strong>PayPal / Cash App / Zelle</strong> — still great defaults if you use them daily</li>
+      </ul>
+
+      <p>Pick your method on the <a href="index.html#swap">swap form</a> and see your offer before you commit.</p>
+    `,
+  },
+
+  'gift-card-scams-to-avoid': {
+    title: '5 Gift Card Scams to Watch Out For',
+    category: 'Safety',
+    readTime: '5 min read',
+    gradient: 'from-swapio-dark/80 to-swapio-light/80',
+    content: `
+      <p>Gift cards are a common target for scammers — both when buying, selling, and receiving them. Knowing the red flags keeps your money safe whether you're swapping on Swapio or anywhere else.</p>
+
+      <h2>1. Pay us first, then we'll buy your card</h2>
+      <p>Legitimate buyers never ask you to pay a fee upfront to sell your card. Swapio shows your offer before you submit and only deducts the 5% service fee from your payout — you never send money to us.</p>
+
+      <h2>2. Send the code before you see an offer</h2>
+      <p>If a platform or person asks for your card number and PIN before showing what you'll receive, walk away. On Swapio, you see your exact cash amount first, then submit details.</p>
+
+      <h2>3. IRS, police, or utility company gift card payments</h2>
+      <p>No government agency or real utility company demands payment via gift cards. If someone on the phone tells you to buy cards and read them the codes, it's a scam — hang up.</p>
+
+      <h2>4. Too-good-to-be-true rates</h2>
+      <p>Offers of 100% face value or "no fees ever" from unknown sites are often bait. Once you send the code, you get nothing. A transparent fee structure — like Swapio's flat 5% — is a sign of a real business.</p>
+
+      <h2>5. Pressure to act immediately</h2>
+      <p>Scammers create fake urgency: "this offer expires in 10 minutes" or "your card will be locked." Take your time, compare options, and use platforms with real support and clear terms.</p>
+
+      <h2>How Swapio protects you</h2>
+      <ul>
+        <li>Encrypted submissions on every page</li>
+        <li>Cards verified before any payout is sent</li>
+        <li>Order codes (SWP-XXXXXX) for every submission</li>
+        <li>Support available through our <a href="contact.html">Reach Us</a> page</li>
+      </ul>
+
+      <p>Stay skeptical, read the offer, and only submit when you're comfortable. If something feels off, it probably is.</p>
+    `,
+  },
 };

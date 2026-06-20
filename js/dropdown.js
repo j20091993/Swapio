@@ -12,6 +12,14 @@ function initSearchableDropdown({
   let highlightedIndex = -1;
   let isScrolling = false;
 
+  const wrapper = inputEl.closest('.dropdown-wrapper');
+  const fieldEl = wrapper?.parentElement;
+
+  function setOpenState(isOpen) {
+    wrapper?.classList.toggle('dropdown-wrapper-open', isOpen);
+    fieldEl?.classList.toggle('dropdown-field-open', isOpen);
+  }
+
   function renderList(filter = '') {
     const query = filter.toLowerCase().trim();
     const selected = getValue();
@@ -22,6 +30,7 @@ function initSearchableDropdown({
     if (filtered.length === 0) {
       listEl.innerHTML = '<div class="dropdown-item dropdown-empty">No results found</div>';
       listEl.classList.add('open');
+      setOpenState(true);
       inputEl.setAttribute('aria-expanded', 'true');
       return;
     }
@@ -34,12 +43,14 @@ function initSearchableDropdown({
       .join('');
 
     listEl.classList.add('open');
+    setOpenState(true);
     inputEl.setAttribute('aria-expanded', 'true');
     highlightedIndex = -1;
   }
 
   function closeList() {
     listEl.classList.remove('open');
+    setOpenState(false);
     inputEl.setAttribute('aria-expanded', 'false');
   }
 
