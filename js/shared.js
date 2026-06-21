@@ -69,9 +69,9 @@ function initSeo() {
   const url = `${origin}${window.location.pathname}${window.location.search}`;
 
   setMeta('property', 'og:url', url);
-  setMeta('property', 'og:image', `${origin}/assets/logo.png`);
+  setMeta('property', 'og:image', `${origin}/assets/logo.webp`);
   setMeta('property', 'og:site_name', SWAPIO.siteName);
-  setMeta('name', 'twitter:image', `${origin}/assets/logo.png`);
+  setMeta('name', 'twitter:image', `${origin}/assets/logo.webp`);
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
