@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://swapio.cc/feedback.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://swapio.cc/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -87,6 +92,21 @@
   </url>
   <url>
     <loc>https://swapio.cc/article.html?slug=gift-card-scams-to-avoid</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://swapio.cc/article.html?slug=sell-visa-gift-card-for-cash</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://swapio.cc/article.html?slug=how-long-do-payouts-take</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://swapio.cc/article.html?slug=sell-steam-gift-card-for-cash</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

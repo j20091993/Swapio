@@ -171,6 +171,7 @@ function getHeader(activePage = '') {
     { href: '/guide.html', label: 'Guide', id: 'guide' },
     { href: '/faq.html', label: 'FAQ', id: 'faq' },
     { href: '/articles.html', label: 'Articles', id: 'articles' },
+    { href: '/feedback.html', label: 'Feedback', id: 'feedback' },
     { href: '/contact.html', label: 'Reach Us', id: 'contact' },
   ];
 
@@ -193,8 +194,11 @@ function getHeader(activePage = '') {
           </nav>
 
           <button id="mobile-menu-btn" class="mobile-menu-btn md:hidden absolute right-0 p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Open menu" aria-expanded="false">
-            <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg id="mobile-menu-icon-open" class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+            <svg id="mobile-menu-icon-close" class="w-6 h-6 text-swapio-dark hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
         </div>
@@ -227,6 +231,7 @@ function getFooter() {
               <li><a href="/guide.html" class="footer-link">Guide</a></li>
               <li><a href="/faq.html" class="footer-link">FAQ</a></li>
               <li><a href="/articles.html" class="footer-link">Articles</a></li>
+              <li><a href="/feedback.html" class="footer-link">Feedback</a></li>
               <li><a href="/contact.html" class="footer-link">Reach Us</a></li>
             </ul>
           </div>
@@ -253,15 +258,15 @@ function getStatsBar() {
     <section class="stats-bar bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 stats-bar-inner">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          <div>
+          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
             <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.cardsSwapped}</p>
             <p class="text-gray-500 mt-1 text-sm">Cards Swapped</p>
           </div>
-          <div>
+          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
             <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.totalCashPaid}</p>
             <p class="text-gray-500 mt-1 text-sm">Total Cash Paid</p>
           </div>
-          <div>
+          <div class="scroll-reveal scroll-reveal--card rounded-2xl bg-white p-6">
             <p class="text-3xl md:text-4xl font-bold text-swapio-dark">${SWAPIO.stats.activeUsers}</p>
             <p class="text-gray-500 mt-1 text-sm">Active Users</p>
           </div>
@@ -280,28 +285,28 @@ function getTrustSignals() {
           <p class="text-gray-500 mt-3 max-w-xl mx-auto">We built a platform that's calm, transparent, and focused on getting you paid fast.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="trust-card">
+          <div class="trust-card scroll-reveal scroll-reveal--card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Secure Verification</h3>
             <p class="text-gray-500 text-sm leading-relaxed">Every card is verified before payout. All submissions are sent over encrypted HTTPS connections.</p>
           </div>
-          <div class="trust-card">
+          <div class="trust-card scroll-reveal scroll-reveal--card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Real Cash Payouts</h3>
             <p class="text-gray-500 text-sm leading-relaxed">Get paid via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer — money you can use anywhere.</p>
           </div>
-          <div class="trust-card">
+          <div class="trust-card scroll-reveal scroll-reveal--card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Fast Payouts</h3>
             <p class="text-gray-500 text-sm leading-relaxed">Most swaps are verified and paid within hours, not days.</p>
           </div>
-          <div class="trust-card">
+          <div class="trust-card scroll-reveal scroll-reveal--card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
             </div>
@@ -323,22 +328,22 @@ function getProcessSteps() {
           <p class="text-gray-500 mt-3">Four simple steps from gift card to cash in your pocket.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="step-number">1</div>
             <h3 class="font-semibold text-swapio-dark mb-2">Choose Your Card</h3>
             <p class="text-gray-500 text-sm">Search from 60+ accepted brands and enter your card balance.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="step-number">2</div>
             <h3 class="font-semibold text-swapio-dark mb-2">Get Your Offer</h3>
             <p class="text-gray-500 text-sm">See exactly how much cash you'll receive before you commit.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="step-number">3</div>
             <h3 class="font-semibold text-swapio-dark mb-2">Submit Details</h3>
             <p class="text-gray-500 text-sm">Enter your card info and preferred payout method securely.</p>
           </div>
-          <div class="process-step">
+          <div class="process-step scroll-reveal">
             <div class="step-number">4</div>
             <h3 class="font-semibold text-swapio-dark mb-2">Get Paid</h3>
             <p class="text-gray-500 text-sm">We verify your card and send cash within hours.</p>
@@ -355,14 +360,24 @@ function getProcessSteps() {
   `;
 }
 
-function closeMobileMenu() {
+function setMobileMenuOpen(isOpen) {
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('mobile-menu-icon-open');
+  const iconClose = document.getElementById('mobile-menu-icon-close');
   if (!btn || !menu) return;
-  menu.classList.remove('mobile-menu-open');
-  menu.classList.add('hidden');
-  btn.setAttribute('aria-expanded', 'false');
-  document.body.classList.remove('mobile-menu-body-lock');
+
+  menu.classList.toggle('mobile-menu-open', isOpen);
+  menu.classList.toggle('hidden', !isOpen);
+  btn.setAttribute('aria-expanded', String(isOpen));
+  btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+  iconOpen?.classList.toggle('hidden', isOpen);
+  iconClose?.classList.toggle('hidden', !isOpen);
+  document.body.classList.toggle('mobile-menu-body-lock', isOpen);
+}
+
+function closeMobileMenu() {
+  setMobileMenuOpen(false);
 }
 
 function initMobileMenu() {
@@ -372,14 +387,49 @@ function initMobileMenu() {
 
   btn.addEventListener('click', () => {
     const isOpen = menu.classList.contains('mobile-menu-open');
-    menu.classList.toggle('mobile-menu-open');
-    menu.classList.toggle('hidden');
-    btn.setAttribute('aria-expanded', String(!isOpen));
-    document.body.classList.toggle('mobile-menu-body-lock', !isOpen);
+    setMobileMenuOpen(!isOpen);
   });
 
   menu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMobileMenu);
+  });
+}
+
+let scrollRevealObserver = null;
+
+function initScrollReveal(root = document) {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const elements = root.querySelectorAll('.scroll-reveal:not(.is-visible)');
+  if (!elements.length) return;
+
+  if (prefersReducedMotion) {
+    elements.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  if (!scrollRevealObserver) {
+    scrollRevealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          scrollRevealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
+    );
+  }
+
+  elements.forEach((el) => {
+    const parent = el.parentElement;
+    if (parent) {
+      const siblings = [...parent.querySelectorAll(':scope > .scroll-reveal')];
+      const index = siblings.indexOf(el);
+      if (index >= 0) {
+        el.style.setProperty('--reveal-delay', `${index * 0.08}s`);
+      }
+    }
+    scrollRevealObserver.observe(el);
   });
 }
 
@@ -423,6 +473,7 @@ function initLayout(activePage = '') {
   initMobileMenu();
   initHeaderScroll();
   initPageAnimations();
+  initScrollReveal();
   scrollToHashTarget();
 }
 

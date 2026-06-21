@@ -282,4 +282,104 @@ const ARTICLES = {
       <p>Stay skeptical, read the offer, and only submit when you're comfortable. If something feels off, it probably is.</p>
     `,
   },
+
+  'sell-visa-gift-card-for-cash': {
+    title: 'How to Sell a Visa Gift Card for Cash',
+    category: 'Guide',
+    readTime: '4 min read',
+    gradient: 'from-swapio-dark to-swapio-light',
+    content: `
+      <p>Visa gift cards are among the most flexible cards you can receive — and among the easiest to swap for real cash. Because they're open-loop prepaid cards, verification is straightforward and payouts move quickly on Swapio.</p>
+
+      <h2>What you'll need</h2>
+      <ul>
+        <li>Your 16-digit Visa card number</li>
+        <li>The CVV on the back of the card (if physical) or in your email (if digital)</li>
+        <li>The current balance — check online or call the number on the back</li>
+        <li>A payout method: PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer</li>
+      </ul>
+
+      <h2>How to swap on Swapio</h2>
+      <p>Search "Visa" on the homepage, enter your balance ($10–$5,000), and choose how you want to get paid. Your cash offer appears instantly — 95% of your card value with the 5% service fee shown upfront. Submit your card details and you'll receive an order code (SWP-XXXXXX) right away.</p>
+
+      <h2>How much will you get?</h2>
+      <p>A $200 Visa card pays out $190. A $75 card pays $71.25. The rate is flat across all brands — your payout method doesn't change the amount, only how fast the money arrives.</p>
+
+      <h2>Tips for a smooth swap</h2>
+      <ul>
+        <li>Register your card online first if the issuer requires it — this avoids verification delays</li>
+        <li>Double-check the balance before submitting</li>
+        <li>Make sure your payout account details are correct</li>
+      </ul>
+
+      <p>Ready to swap? Head to the <a href="index.html">homepage</a> and search for Visa to get started.</p>
+    `,
+  },
+
+  'how-long-do-payouts-take': {
+    title: 'How Long Do Swapio Payouts Take?',
+    category: 'FAQ',
+    readTime: '3 min read',
+    gradient: 'from-swapio-dark to-swapio-light/50',
+    content: `
+      <p>Once you submit a swap on Swapio, you want to know when the money hits your account. Here's a realistic timeline for each stage — from order code to cash in hand.</p>
+
+      <h2>Order code: instant</h2>
+      <p>The moment you hit "Submit Swap," you receive your order code (SWP-XXXXXX). Save it — you'll need it if you contact support.</p>
+
+      <h2>Verification: 1–4 hours</h2>
+      <p>Our team checks that your card is valid, the balance matches, and it hasn't been reported lost or stolen. Most cards verify within a few hours. Complex cases or high balances may take slightly longer.</p>
+
+      <h2>Payout by method</h2>
+      <ul>
+        <li><strong>PayPal, Venmo, Cash App, Zelle:</strong> Usually within hours of verification</li>
+        <li><strong>Bitcoin:</strong> Sent after verification; blockchain confirmation time varies</li>
+        <li><strong>Bank Transfer (ACH):</strong> Typically same day to one business day depending on your bank</li>
+      </ul>
+
+      <h2>What can slow things down?</h2>
+      <ul>
+        <li>Incorrect card number or PIN</li>
+        <li>Card already redeemed or zero balance</li>
+        <li>Wrong payout account details</li>
+        <li>Submissions outside business hours (still processed, may start next morning)</li>
+      </ul>
+
+      <h2>Still waiting?</h2>
+      <p>Contact us through the <a href="contact.html">Reach Us</a> page with your order code. We'll look into it and get back to you quickly.</p>
+    `,
+  },
+
+  'sell-steam-gift-card-for-cash': {
+    title: 'How to Sell a Steam Gift Card for Cash',
+    category: 'Tips',
+    readTime: '4 min read',
+    gradient: 'from-swapio-light to-swapio-dark/60',
+    content: `
+      <p>Got a Steam gift card you won't use? Maybe you already own the games, switched platforms, or just want cash instead of store credit. Steam cards swap quickly on Swapio — especially during sale season when lots of people receive them as gifts.</p>
+
+      <h2>What you'll need</h2>
+      <ul>
+        <li>Your Steam wallet code (from email or the back of a physical card)</li>
+        <li>The current balance on the card</li>
+        <li>A payout method — PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer</li>
+        <li>A valid email for order updates</li>
+      </ul>
+
+      <h2>Step-by-step on Swapio</h2>
+      <p>Search "Steam" on the homepage, enter your balance, and pick your payout method. You'll see your exact cash offer instantly — 95% of your card value with the 5% fee shown upfront. Submit your wallet code and receive your order code (SWP-XXXXXX) immediately.</p>
+
+      <h2>How much will you get?</h2>
+      <p>A $50 Steam card pays out $47.50. A $20 card pays $19. The rate is the same as every other brand on Swapio — no special gaming penalty or bonus.</p>
+
+      <h2>Common mistakes to avoid</h2>
+      <ul>
+        <li>Scratching the code before you're ready to submit — codes can be hard to read if damaged</li>
+        <li>Entering the code with spaces or dashes — copy it exactly as shown</li>
+        <li>Submitting a code that's already been redeemed on Steam</li>
+      </ul>
+
+      <p>Ready to swap? Head to the <a href="index.html">homepage</a> and search for Steam to get started.</p>
+    `,
+  },
 };
