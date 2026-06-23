@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your Swapio dashboard — track gift card submissions, pending swaps, and payout totals.">
+  <meta property="og:title" content="Dashboard — Swapio">
+  <meta property="og:image" content="/assets/logo.webp">
+  <link rel="icon" href="/assets/logo.webp" type="image/webp">
+  <title>Dashboard — Swapio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'swapio-dark': '#2D467B',
+            'swapio-light': '#78A5D3',
+            'swapio-bg': '#F8FAFC',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body class="text-gray-800" data-page="dashboard">
+
+  <div id="site-header"></div>
+
+  <section class="page-hero page-hero--plain page-enter">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-swapio-dark">Dashboard</h1>
+          <p id="dashboard-welcome" class="text-gray-500 mt-2">Loading your account...</p>
+        </div>
+        <button type="button" id="logout-btn" class="btn-secondary self-start sm:self-auto">Log Out</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-12 md:pb-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div id="dashboard-loading" class="text-center py-16 text-gray-500">
+        <span class="spinner spinner--dark inline-block"></span>
+        <p class="mt-4">Loading dashboard...</p>
+      </div>
+
+      <div id="dashboard-error" class="hidden mb-6 p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg" role="alert"></div>
+
+      <div id="dashboard-content" class="hidden space-y-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="dashboard-stat-card">
+            <p class="dashboard-stat-label">Total Submissions</p>
+            <p id="stat-total" class="dashboard-stat-value">0</p>
+          </div>
+          <div class="dashboard-stat-card">
+            <p class="dashboard-stat-label">Pending</p>
+            <p id="stat-pending" class="dashboard-stat-value">0</p>
+          </div>
+          <div class="dashboard-stat-card">
+            <p class="dashboard-stat-label">Approved</p>
+            <p id="stat-approved" class="dashboard-stat-value">0</p>
+          </div>
+          <div class="dashboard-stat-card">
+            <p class="dashboard-stat-label">Total Value</p>
+            <p id="stat-value" class="dashboard-stat-value">$0</p>
+          </div>
+        </div>
+
+        <div class="swap-box p-5 sm:p-8">
+          <div class="flex items-center justify-between gap-4 mb-6">
+            <h2 class="text-xl font-bold text-swapio-dark">My Submissions</h2>
+            <a href="/index.html#swap" class="text-sm font-semibold text-swapio-dark hover:text-swapio-light transition-colors">Start a swap →</a>
+          </div>
+
+          <div id="submissions-empty" class="hidden dashboard-empty">
+            <div class="w-14 h-14 rounded-2xl bg-swapio-light/20 flex items-center justify-center mx-auto mb-4">
+              <svg class="w-7 h-7 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-semibold text-swapio-dark">No submissions yet</h3>
+            <p class="text-gray-500 text-sm mt-2 max-w-sm mx-auto">Start your first swap and it will show up here. Logged-in submissions are tracked automatically on your dashboard.</p>
+            <a href="/index.html#swap" class="btn-primary mt-6 inline-flex">Start a Swap</a>
+          </div>
+
+          <div id="submissions-list" class="hidden space-y-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+
+  <script src="/js/auth.js"></script>
+  <script src="/js/shared.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

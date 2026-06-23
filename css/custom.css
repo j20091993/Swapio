@@ -174,6 +174,30 @@ body {
   border-color: #243a66;
 }
 
+.nav-btn-accent {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2D467B 0%, #4A6FA5 100%);
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(45, 70, 123, 0.28);
+}
+
+.nav-btn-accent:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #243a66 0%, #3d5f94 100%);
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(45, 70, 123, 0.34);
+  transform: translateY(-1px);
+}
+
+.nav-btn-dashboard {
+  background: linear-gradient(135deg, #78A5D3 0%, #5f93c8 100%);
+  box-shadow: 0 4px 14px rgba(120, 165, 211, 0.35);
+}
+
+.nav-btn-dashboard:hover {
+  background: linear-gradient(135deg, #6a96c4 0%, #4f84b8 100%);
+}
+
 .scroll-reveal {
   opacity: 0;
   transform: translateY(28px);
@@ -313,8 +337,128 @@ body {
 }
 
 .mobile-menu.mobile-menu-open {
-  max-height: 420px;
+  max-height: 520px;
   opacity: 1;
+}
+
+.auth-card {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.account-notice {
+  margin-bottom: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.account-notice--info {
+  background: #EFF6FF;
+  border: 1px solid rgba(120, 165, 211, 0.35);
+  color: #334155;
+}
+
+.account-notice--success {
+  background: #F0FDF4;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #166534;
+}
+
+.dashboard-stat-card {
+  background: white;
+  border: 1px solid rgba(45, 70, 123, 0.12);
+  border-radius: 1rem;
+  padding: 1.25rem 1rem;
+  box-shadow: 0 4px 16px rgba(45, 70, 123, 0.06);
+}
+
+.dashboard-stat-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.dashboard-stat-value {
+  margin-top: 0.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2D467B;
+  line-height: 1.1;
+}
+
+.dashboard-empty {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+.submission-card {
+  background: #F8FAFC;
+  border: 1px solid rgba(45, 70, 123, 0.1);
+  border-radius: 0.875rem;
+  padding: 1rem 1.125rem;
+}
+
+.submission-card-top,
+.submission-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.submission-card-bottom {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(45, 70, 123, 0.08);
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+
+.submission-code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #2D467B;
+}
+
+.submission-meta {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: #64748B;
+}
+
+.submission-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.submission-status--pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.submission-status--approved {
+  background: #DCFCE7;
+  color: #166534;
+}
+
+.submission-status--rejected {
+  background: #FEE2E2;
+  color: #991B1B;
+}
+
+.spinner--dark {
+  border-color: rgba(45, 70, 123, 0.2);
+  border-top-color: #2D467B;
 }
 
 .swap-step {

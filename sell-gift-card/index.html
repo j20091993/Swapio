@@ -47,6 +47,7 @@
       <div class="swap-box p-5 sm:p-6 md:p-8">
 
         <div id="swap-form-section" class="swap-step swap-step-active">
+          <div id="account-notice" class="account-notice account-notice--info hidden"></div>
           <div id="form-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg" role="alert"></div>
 
           <form id="submission-form" class="space-y-4" novalidate>
@@ -94,6 +95,7 @@
           <p class="text-sm text-gray-500">
             You'll receive <span id="success-payout" class="font-semibold text-swapio-dark"></span>
           </p>
+          <p id="success-tracked-note" class="hidden text-sm text-gray-500 mt-4 px-2 max-w-sm mx-auto"></p>
           <p class="text-xs text-gray-400 mt-4 px-2">Save your order code for reference.</p>
           <button type="button" id="start-another-swap" class="btn-secondary mt-6 sm:mt-8 w-full sm:w-auto">Start Another Swap</button>
         </div>
@@ -104,6 +106,7 @@
 
   <div id="site-footer"></div>
 
+  <script src="/js/auth.js"></script>
   <script src="/js/shared.js"></script>
   <script src="/js/card-requirements.js"></script>
   <script src="/js/validation.js"></script>

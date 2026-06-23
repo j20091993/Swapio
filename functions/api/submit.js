@@ -1,14 +1,18 @@
 /**
- * Cloudflare Pages Function — Telegram submission handler
+ * Cloudflare Pages Function — swap submission handler
  *
- * Environment variables (set in Cloudflare Pages dashboard):
+ * Environment variables (Cloudflare Pages dashboard):
  *   TELEGRAM_BOT_TOKEN  — Bot token from @BotFather
  *   TELEGRAM_CHANNEL_ID — Channel/chat ID (e.g. -1001234567890)
+ *
+ * Bindings:
+ *   DB — D1 database (tracks submissions for logged-in users)
  */
+
+import { EMAIL_REGEX, getUserFromRequest } from '../lib/auth.js';
 
 const BTC_LEGACY_REGEX = /^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$/;
 const BTC_BECH32_REGEX = /^bc1[a-z0-9]{25,89}$/i;
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function isValidBitcoinAddress(address) {
   const trimmed = String(address).trim();
@@ -137,8 +141,38 @@ export async function onRequestPost(context) {
       );
     }
 
+    const user = !isContact ? await getUserFromRequest(request, env) : null;
+    let tracked = false;
+
+    if (!isContact && user && env.DB) {
+      try {
+        await env.DB.prepare(
+          `INSERT INTO submissions (
+            user_id, order_code, card_brand, card_balance, payout_amount,
+            payout_method, status, full_name, email
+          ) VALUES (?, ?, ?, ?, ?, ?, 'pending', ?, ?)`
+        ).bind(
+          user.id,
+          data.orderCode,
+          data.cardBrand,
+          Number(data.cardBalance),
+          Number(data.payoutAmount),
+          data.payoutMethod,
+          data.fullName || null,
+          String(data.email).trim().toLowerCase()
+        ).run();
+        tracked = true;
+      } catch (dbErr) {
+        console.error('Failed to save submission:', dbErr);
+      }
+    }
+
     return new Response(
-      JSON.stringify({ success: true, orderCode: data.orderCode }),
+      JSON.stringify({
+        success: true,
+        orderCode: data.orderCode,
+        tracked,
+      }),
       { status: 200, headers: corsHeaders }
     );
   } catch (err) {

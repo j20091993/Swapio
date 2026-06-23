@@ -93,6 +93,26 @@ function initSellPage() {
   if (emailInput) setupEmailValidation(emailInput);
 
   initPageAnimations();
+  initSellAccountNotice();
+}
+
+function initSellAccountNotice() {
+  const notice = document.getElementById('account-notice');
+  if (!notice) return;
+
+  waitForAuth().then((user) => {
+    notice.classList.remove('hidden');
+    if (user) {
+      notice.className = 'account-notice account-notice--success';
+      notice.innerHTML = `Logged in as <strong>${user.username}</strong>. This submission will appear on your <a href="/dashboard.html" class="text-swapio-dark underline font-semibold">dashboard</a>.`;
+
+      const emailInput = document.getElementById('email');
+      if (emailInput && !emailInput.value) emailInput.value = user.email;
+    } else {
+      notice.className = 'account-notice account-notice--info';
+      notice.innerHTML = `<a href="/login.html" class="text-swapio-dark underline font-semibold">Log in</a> or <a href="/signup.html" class="text-swapio-dark underline font-semibold">sign up</a> to track this submission on your dashboard. Guest submissions still work — they just won't be saved to an account.`;
+    }
+  });
 }
 
 function initBrandFromUrl() {
@@ -464,11 +484,22 @@ function initSubmissionForm() {
     };
 
     try {
-      await submitToTelegram(payload);
+      const result = await submitToTelegram(payload);
 
       document.getElementById('success-order-code').textContent = orderCode;
       document.getElementById('success-payout').textContent =
         `${formatCurrency(payout)} via ${swapState.payoutMethod}`;
+
+      const trackedNote = document.getElementById('success-tracked-note');
+      if (trackedNote) {
+        if (result.tracked) {
+          trackedNote.innerHTML = 'This swap is saved to your <a href="/dashboard.html" class="text-swapio-dark underline font-semibold">dashboard</a>.';
+          trackedNote.classList.remove('hidden');
+        } else {
+          trackedNote.textContent = 'Log in before submitting to track swaps on your dashboard.';
+          trackedNote.classList.remove('hidden');
+        }
+      }
 
       clearSwapSession();
       showSwapStep('success-screen');
