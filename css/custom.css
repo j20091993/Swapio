@@ -900,7 +900,7 @@ body {
 .article-card-book-icon {
   width: 3rem;
   height: 3rem;
-  opacity: 0.85;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .article-card {
