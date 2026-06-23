@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (processEl) processEl.innerHTML = getProcessSteps();
 
   initPageAnimations();
-  initScrollReveal();
+  initScrollReveal(statsEl);
+  initScrollReveal(trustEl);
+  initScrollReveal(processEl);
   initHomeSchema();
   updateGetOfferButton();
   initBrandFromUrl();

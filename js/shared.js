@@ -185,21 +185,24 @@ function getHeader(activePage = '') {
     )
     .join('');
 
+  const dashboardNavClass = activePage === 'dashboard' ? 'nav-btn nav-btn-active' : 'nav-btn';
+
   return `
     <header class="site-header sticky top-0 z-50 bg-white transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
-        <div class="flex items-center justify-between h-16 md:h-18 gap-4">
-          <a href="/index.html" class="site-brand flex items-center gap-2.5 shrink-0">
-            <img src="/assets/logo.webp" alt="" class="site-logo" width="40" height="40">
-            <span class="site-name font-bold text-swapio-dark text-lg">${SWAPIO.siteName}</span>
-          </a>
-
-          <nav class="hidden md:flex items-center gap-2 flex-wrap justify-end" aria-label="Main navigation">
+        <div class="relative flex items-center justify-center h-16 md:h-18">
+          <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
             ${navLinks}
-            <a href="/login.html" id="auth-nav-btn" class="nav-btn nav-btn-accent">Log In</a>
+            <span id="auth-nav-guest" class="inline-flex items-center gap-2">
+              <a href="/login.html" class="nav-btn nav-btn-accent">Log In</a>
+            </span>
+            <span id="auth-nav-user" class="hidden inline-flex items-center gap-2">
+              <a href="/dashboard.html" id="auth-dashboard-link" class="${dashboardNavClass}">Dashboard</a>
+              <button type="button" data-sign-out class="nav-btn nav-btn-signout">Sign Out</button>
+            </span>
           </nav>
 
-          <button id="mobile-menu-btn" class="mobile-menu-btn md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors shrink-0" aria-label="Open menu" aria-expanded="false">
+          <button id="mobile-menu-btn" class="mobile-menu-btn md:hidden absolute right-0 p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="Open menu" aria-expanded="false">
             <svg id="mobile-menu-icon-open" class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
             </svg>
@@ -219,7 +222,13 @@ function getHeader(activePage = '') {
                 `<a href="${item.href}" class="${navBtnClass(item.id)} w-full text-center">${item.label}</a>`
             )
             .join('')}
-          <a href="/login.html" id="auth-nav-btn-mobile" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
+          <span id="auth-nav-guest-mobile" class="flex flex-col gap-2">
+            <a href="/login.html" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
+          </span>
+          <span id="auth-nav-user-mobile" class="hidden flex flex-col gap-2">
+            <a href="/dashboard.html" class="${dashboardNavClass} w-full text-center">Dashboard</a>
+            <button type="button" data-sign-out class="nav-btn nav-btn-signout w-full text-center">Sign Out</button>
+          </span>
         </nav>
         </div>
       </div>
@@ -288,8 +297,8 @@ function getTrustSignals() {
     <section class="py-16 bg-white">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-2xl md:text-3xl font-bold text-swapio-dark">Why People Trust Swapio</h2>
-          <p class="text-gray-500 mt-3 max-w-xl mx-auto">We built a platform that's calm, transparent, and focused on getting you paid fast.</p>
+          <h2 class="text-2xl md:text-3xl font-bold text-swapio-dark scroll-reveal">Why People Trust Swapio</h2>
+          <p class="text-gray-500 mt-3 max-w-xl mx-auto scroll-reveal">We built a platform that's calm, transparent, and focused on getting you paid fast.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div class="trust-card scroll-reveal scroll-reveal--card">
@@ -399,6 +408,10 @@ function initMobileMenu() {
 
   menu.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', closeMobileMenu);
+  });
+
+  menu.querySelectorAll('[data-sign-out]').forEach((btn) => {
+    btn.addEventListener('click', closeMobileMenu);
   });
 }
 

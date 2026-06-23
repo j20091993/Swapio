@@ -162,16 +162,16 @@ body {
 }
 
 .nav-btn-active {
-  color: #ffffff;
-  background: #2D467B;
-  border-color: #2D467B;
-  box-shadow: 0 2px 8px rgba(45, 70, 123, 0.2);
+  color: #2D467B;
+  background: rgba(120, 165, 211, 0.14);
+  border-color: rgba(120, 165, 211, 0.35);
+  box-shadow: none;
 }
 
 .nav-btn-active:hover {
-  color: #ffffff;
-  background: #243a66;
-  border-color: #243a66;
+  color: #2D467B;
+  background: rgba(120, 165, 211, 0.22);
+  border-color: rgba(120, 165, 211, 0.45);
 }
 
 .nav-btn-accent {
@@ -189,13 +189,18 @@ body {
   transform: translateY(-1px);
 }
 
-.nav-btn-dashboard {
-  background: linear-gradient(135deg, #78A5D3 0%, #5f93c8 100%);
-  box-shadow: 0 4px 14px rgba(120, 165, 211, 0.35);
+.nav-btn-signout {
+  color: #64748B;
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.nav-btn-dashboard:hover {
-  background: linear-gradient(135deg, #6a96c4 0%, #4f84b8 100%);
+.nav-btn-signout:hover {
+  color: #2D467B;
+  background: #F8FAFC;
+  border-color: #e2e8f0;
 }
 
 .scroll-reveal {
@@ -276,7 +281,6 @@ body {
   color: #9ca3af;
 }
 
-.trust-card,
 .process-step,
 .btn-primary,
 .btn-secondary,
@@ -284,6 +288,19 @@ body {
 .dropdown-item,
 .article-card {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trust-card:not(.scroll-reveal) {
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trust-card.scroll-reveal {
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0s);
 }
 
 .page-enter {
@@ -323,9 +340,8 @@ body {
 .faq-item:nth-child(7) { animation-delay: 0.3s; }
 .faq-item:nth-child(8) { animation-delay: 0.34s; }
 
-.trust-card.scroll-reveal.is-visible:hover {
-  box-shadow: 0 12px 32px rgba(45, 70, 123, 0.12);
-  transform: translateY(-3px);
+.dashboard-hero > div {
+  padding-bottom: 2.5rem;
 }
 
 .mobile-menu {
@@ -538,10 +554,10 @@ body {
   border: 1px solid #f1f5f9;
   border-radius: 1rem;
   padding: 1.5rem;
-  transition: box-shadow 0.2s ease;
 }
 
-.trust-card:hover {
+.trust-card:not(.scroll-reveal):hover,
+.trust-card.scroll-reveal.is-visible:hover {
   box-shadow: 0 8px 28px rgba(45, 70, 123, 0.1);
   transform: translateY(-2px);
 }

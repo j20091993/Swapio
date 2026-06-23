@@ -28,17 +28,34 @@ function isAuthenticated() {
 }
 
 function updateAuthNav() {
-  const btn = document.getElementById('auth-nav-btn');
-  const mobileBtn = document.getElementById('auth-nav-btn-mobile');
-  const label = currentUser ? 'Dashboard' : 'Log In';
-  const href = currentUser ? '/dashboard.html' : '/login.html';
-  const className = currentUser ? 'nav-btn nav-btn-accent nav-btn-dashboard' : 'nav-btn nav-btn-accent';
+  const guest = document.getElementById('auth-nav-guest');
+  const user = document.getElementById('auth-nav-user');
+  const guestMobile = document.getElementById('auth-nav-guest-mobile');
+  const userMobile = document.getElementById('auth-nav-user-mobile');
 
-  [btn, mobileBtn].forEach((el) => {
-    if (!el) return;
-    el.textContent = label;
-    el.href = href;
-    el.className = `${className}${el.id.includes('mobile') ? ' w-full text-center' : ''}`;
+  if (currentUser) {
+    guest?.classList.add('hidden');
+    user?.classList.remove('hidden');
+    guestMobile?.classList.add('hidden');
+    userMobile?.classList.remove('hidden');
+  } else {
+    guest?.classList.remove('hidden');
+    user?.classList.add('hidden');
+    guestMobile?.classList.remove('hidden');
+    userMobile?.classList.add('hidden');
+  }
+
+  bindSignOutButtons();
+}
+
+function bindSignOutButtons() {
+  document.querySelectorAll('[data-sign-out]').forEach((btn) => {
+    if (btn.dataset.signOutBound) return;
+    btn.dataset.signOutBound = '1';
+    btn.addEventListener('click', async () => {
+      await logoutUser();
+      window.location.href = '/index.html';
+    });
   });
 }
 

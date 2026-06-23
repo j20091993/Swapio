@@ -10,11 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   await loadDashboard();
-
-  document.getElementById('logout-btn')?.addEventListener('click', async () => {
-    await logoutUser();
-    window.location.href = '/login.html';
-  });
 });
 
 async function loadDashboard() {

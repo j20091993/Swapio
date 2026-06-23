@@ -1,0 +1,8 @@
+name = "swapio"
+compatibility_date = "2024-06-19"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "swapio-db"
+database_id = "YOUR_D1_DATABASE_ID"
