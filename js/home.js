@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initLayout('home');
+  resetHomeScroll();
   initDropdowns();
   initSwapFlow();
 
@@ -42,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
   updateGetOfferButton();
   initBrandFromUrl();
 });
+
+function resetHomeScroll() {
+  if (window.location.hash) return;
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+}
 
 function initHomeSchema() {
   const script = document.createElement('script');

@@ -124,20 +124,52 @@ body {
   line-height: 1.2;
 }
 
-.site-logo {
+.site-logo,
+.site-logo--footer,
+.swapio-logo {
   display: block;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 22%;
+}
+
+.site-logo {
   height: 2.5rem;
   width: 2.5rem;
-  flex-shrink: 0;
-  object-fit: contain;
-  border-radius: 0.55rem;
 }
 
 .site-logo--footer {
   height: 2.25rem;
   width: 2.25rem;
-  border-radius: 0.55rem;
-  object-fit: contain;
+}
+
+.swapio-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+}
+
+.site-header:not(.auth-ready) .auth-nav-slot {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.site-header.auth-ready .auth-nav-slot {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease;
+}
+
+.auth-nav-slot {
+  min-width: 10.5rem;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .auth-nav-slot {
+    min-width: 0;
+    width: 100%;
+  }
 }
 
 .nav-btn {
@@ -159,6 +191,17 @@ body {
   color: #2D467B;
   background: #F8FAFC;
   border-color: #e2e8f0;
+}
+
+@media (min-width: 768px) and (max-width: 960px) {
+  .site-header nav .nav-btn {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+
+  .auth-nav-slot {
+    min-width: 9.5rem;
+  }
 }
 
 .nav-btn-active {

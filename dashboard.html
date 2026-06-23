@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Your Swapio dashboard — track gift card submissions, pending swaps, and payout totals.">
   <meta property="og:title" content="Dashboard — Swapio">
-  <meta property="og:image" content="/assets/logo.webp">
-  <link rel="icon" href="/assets/logo.webp" type="image/webp">
+  <meta property="og:image" content="/assets/logo.png">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
   <title>Dashboard — Swapio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,7 @@
 
   <section class="page-hero page-hero--plain page-enter dashboard-hero">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <img src="/assets/logo.png" alt="Swapio" class="swapio-logo" width="56" height="56">
       <h1 class="text-3xl md:text-4xl font-bold text-swapio-dark">Dashboard</h1>
       <p id="dashboard-welcome" class="text-gray-500 mt-3 text-base sm:text-lg">Loading your account...</p>
     </div>
@@ -70,7 +71,7 @@
         <div class="swap-box p-5 sm:p-8">
           <div class="flex items-center justify-between gap-4 mb-6">
             <h2 class="text-xl font-bold text-swapio-dark">My Submissions</h2>
-            <a href="/index.html#swap" class="text-sm font-semibold text-swapio-dark hover:text-swapio-light transition-colors">Start a swap →</a>
+            <a href="/index.html" class="text-sm font-semibold text-swapio-dark hover:text-swapio-light transition-colors">Start a swap →</a>
           </div>
 
           <div id="submissions-empty" class="hidden dashboard-empty">
@@ -79,7 +80,7 @@
             </div>
             <h3 class="text-lg font-semibold text-swapio-dark">No submissions yet</h3>
             <p class="text-gray-500 text-sm mt-2 max-w-sm mx-auto">Start your first swap and it will show up here. Logged-in submissions are tracked automatically on your dashboard.</p>
-            <a href="/index.html#swap" class="btn-primary mt-6 inline-flex">Start a Swap</a>
+            <a href="/index.html" class="btn-primary mt-6 inline-flex">Start a Swap</a>
           </div>
 
           <div id="submissions-list" class="hidden space-y-3"></div>

@@ -46,6 +46,7 @@ function updateAuthNav() {
   }
 
   bindSignOutButtons();
+  document.querySelector('.site-header')?.classList.add('auth-ready');
 }
 
 function bindSignOutButtons() {

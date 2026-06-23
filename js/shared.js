@@ -2,6 +2,7 @@
 
 const SWAPIO = {
   siteName: 'Swapio',
+  logoPath: '/assets/logo.png',
   supportEmail: 'support@swapio.cc',
 
   colors: {
@@ -69,9 +70,9 @@ function initSeo() {
   const url = `${origin}${window.location.pathname}${window.location.search}`;
 
   setMeta('property', 'og:url', url);
-  setMeta('property', 'og:image', `${origin}/assets/logo.webp`);
+  setMeta('property', 'og:image', `${origin}${SWAPIO.logoPath}`);
   setMeta('property', 'og:site_name', SWAPIO.siteName);
-  setMeta('name', 'twitter:image', `${origin}/assets/logo.webp`);
+  setMeta('name', 'twitter:image', `${origin}${SWAPIO.logoPath}`);
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
@@ -98,6 +99,7 @@ function initSeo() {
 }
 
 function scrollToHashTarget() {
+  if (document.body.dataset.page !== 'home') return;
   const hash = window.location.hash;
   if (!hash) return;
   const target = document.querySelector(hash);
@@ -193,12 +195,14 @@ function getHeader(activePage = '') {
         <div class="relative flex items-center justify-center h-16 md:h-18">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
             ${navLinks}
-            <span id="auth-nav-guest" class="inline-flex items-center gap-2">
-              <a href="/login.html" class="nav-btn nav-btn-accent">Log In</a>
-            </span>
-            <span id="auth-nav-user" class="hidden inline-flex items-center gap-2">
-              <a href="/dashboard.html" id="auth-dashboard-link" class="${dashboardNavClass}">Dashboard</a>
-              <button type="button" data-sign-out class="nav-btn nav-btn-signout">Sign Out</button>
+            <span class="auth-nav-slot inline-flex items-center gap-2">
+              <span id="auth-nav-guest" class="hidden inline-flex items-center gap-2">
+                <a href="/login.html" class="nav-btn nav-btn-accent">Log In</a>
+              </span>
+              <span id="auth-nav-user" class="hidden inline-flex items-center gap-2">
+                <a href="/dashboard.html" id="auth-dashboard-link" class="${dashboardNavClass}">Dashboard</a>
+                <button type="button" data-sign-out class="nav-btn nav-btn-signout">Sign Out</button>
+              </span>
             </span>
           </nav>
 
@@ -222,12 +226,14 @@ function getHeader(activePage = '') {
                 `<a href="${item.href}" class="${navBtnClass(item.id)} w-full text-center">${item.label}</a>`
             )
             .join('')}
-          <span id="auth-nav-guest-mobile" class="flex flex-col gap-2">
-            <a href="/login.html" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
-          </span>
-          <span id="auth-nav-user-mobile" class="hidden flex flex-col gap-2">
-            <a href="/dashboard.html" class="${dashboardNavClass} w-full text-center">Dashboard</a>
-            <button type="button" data-sign-out class="nav-btn nav-btn-signout w-full text-center">Sign Out</button>
+          <span class="auth-nav-slot flex flex-col gap-2">
+            <span id="auth-nav-guest-mobile" class="hidden flex flex-col gap-2">
+              <a href="/login.html" class="nav-btn nav-btn-accent w-full text-center">Log In</a>
+            </span>
+            <span id="auth-nav-user-mobile" class="hidden flex flex-col gap-2">
+              <a href="/dashboard.html" class="${dashboardNavClass} w-full text-center">Dashboard</a>
+              <button type="button" data-sign-out class="nav-btn nav-btn-signout w-full text-center">Sign Out</button>
+            </span>
           </span>
         </nav>
         </div>
@@ -495,7 +501,32 @@ function initLayout(activePage = '') {
   initPageAnimations();
   initScrollReveal();
   scrollToHashTarget();
-  if (typeof initAuth === 'function') initAuth();
+  if (typeof initAuth === 'function') {
+    initAuth();
+  } else {
+    finishAuthNavLoading(false);
+  }
+}
+
+function finishAuthNavLoading(isLoggedIn) {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  header.classList.add('auth-ready');
+  const guest = document.getElementById('auth-nav-guest');
+  const user = document.getElementById('auth-nav-user');
+  const guestMobile = document.getElementById('auth-nav-guest-mobile');
+  const userMobile = document.getElementById('auth-nav-user-mobile');
+  if (isLoggedIn) {
+    guest?.classList.add('hidden');
+    user?.classList.remove('hidden');
+    guestMobile?.classList.add('hidden');
+    userMobile?.classList.remove('hidden');
+  } else {
+    guest?.classList.remove('hidden');
+    user?.classList.add('hidden');
+    guestMobile?.classList.remove('hidden');
+    userMobile?.classList.add('hidden');
+  }
 }
 
 async function submitToTelegram(data) {
