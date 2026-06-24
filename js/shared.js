@@ -2,8 +2,60 @@
 
 const SWAPIO = {
   siteName: 'Swapio',
+  siteUrl: 'https://swapio.cc',
   logoPath: '/assets/logo.png',
+  ogImagePath: '/assets/logo-512.png',
+  faviconPath: '/assets/logo-32.png',
+  appleTouchIconPath: '/assets/logo-180.png',
   supportEmail: 'support@swapio.cc',
+
+  seoKeywords: [
+    'gift card to cash', 'sell gift cards', 'sell gift cards online', 'swap gift cards',
+    'exchange gift cards', 'gift card exchange', 'cash for gift cards', 'unused gift cards',
+    'turn gift cards into cash', 'gift card buyer', 'sell unused gift cards', 'gift card payout',
+    'instant gift card payout', 'fast gift card cash', 'gift card cash out', 'redeem gift cards for cash',
+    'Swapio', 'swapio.cc', 'sell gift cards for cash', 'best gift card exchange',
+    'sell Amazon gift card', 'sell Apple gift card', 'sell Steam gift card', 'sell Visa gift card',
+    'sell Mastercard gift card', 'sell Google Play gift card', 'sell PlayStation gift card',
+    'sell Xbox gift card', 'sell Nintendo gift card', 'sell Roblox gift card', 'sell Target gift card',
+    'sell Walmart gift card', 'sell Best Buy gift card', 'sell Starbucks gift card',
+    'sell Netflix gift card', 'sell Spotify gift card', 'sell Uber gift card', 'sell DoorDash gift card',
+    'sell Airbnb gift card', 'sell Nike gift card', 'sell Sephora gift card', 'sell GameStop gift card',
+    'sell eBay gift card', 'sell Costco gift card', 'sell Home Depot gift card', "sell Lowe's gift card",
+    'sell American Express gift card', 'sell Paysafecard', 'sell Riot Games gift card',
+    'sell Valorant gift card', 'sell Battle.net gift card', 'sell Fortnite gift card',
+    'sell Discord Nitro gift card', 'sell Twitch gift card', 'sell Hulu gift card',
+    'sell YouTube Premium gift card', 'sell Hotels.com gift card', 'sell Expedia gift card',
+    'sell Chipotle gift card', 'sell Chick-fil-A gift card', "sell McDonald's gift card",
+    'sell Subway gift card', "sell Domino's gift card", 'sell Uber Eats gift card',
+    'sell CVS gift card', 'sell Walgreens gift card', "sell Kohl's gift card",
+    'sell TJ Maxx gift card', 'sell Marshalls gift card', 'sell IKEA gift card',
+    'sell Newegg gift card', 'sell Zara gift card', 'sell H&M gift card',
+    "sell Macy's gift card", 'sell Nordstrom gift card', 'sell Ulta gift card',
+    'sell Adidas gift card', 'sell Razer Gold gift card', 'sell Minecraft gift card',
+    'sell EA gift card', 'sell Nintendo eShop gift card',
+    'PayPal gift card payout', 'Cash App gift card payout', 'Zelle gift card payout',
+    'Venmo gift card payout', 'Bitcoin gift card payout', 'bank transfer gift card payout',
+    'gift card to PayPal', 'gift card to Cash App', 'gift card to Zelle', 'gift card to Venmo',
+    'gift card to Bitcoin', 'gift card to bank account', '95 percent gift card payout',
+    'gift card verification', 'safe gift card selling', 'legit gift card exchange',
+    'gift card scam protection', 'gift card balance check', 'electronic gift card cash',
+    'physical gift card cash', 'e-gift card to cash', 'digital gift card exchange',
+    'sell partially used gift card', 'sell full balance gift card', 'gift card liquidation',
+    'convert gift cards to money', 'monetize gift cards', 'gift card resale',
+    'online gift card marketplace', 'trusted gift card buyer', 'same day gift card payout',
+    'quick gift card cash', 'gift card swap platform', 'gift card trade for cash',
+    'holiday gift card cash', 'birthday gift card cash', 'corporate gift card cash',
+    'reward gift card cash', 'store credit to cash', 'prepaid card to cash',
+    'Visa prepaid to cash', 'Mastercard prepaid to cash', 'open loop gift card cash',
+    'closed loop gift card cash', 'retail gift card cash', 'restaurant gift card cash',
+    'gaming gift card cash', 'streaming gift card cash', 'travel gift card cash',
+    'fashion gift card cash', 'beauty gift card cash', 'grocery gift card cash',
+    'sell gift card USA', 'sell gift cards fast', 'sell gift cards safely',
+    'gift card exchange rates', 'best rate gift card selling', 'low fee gift card exchange',
+    'transparent gift card fees', 'gift card order tracking', 'gift card submission',
+    'how to sell gift cards', 'where to sell gift cards', 'gift card cash guide',
+  ].join(', '),
 
   colors: {
     darkBlue: '#2D467B',
@@ -108,9 +160,11 @@ function initSeo() {
   const url = canonicalLink?.href || `${origin}${window.location.pathname}`;
 
   setMeta('property', 'og:url', url);
-  setMeta('property', 'og:image', `${origin}${SWAPIO.logoPath}`);
+  setMeta('property', 'og:image', `${origin}${SWAPIO.ogImagePath}`);
   setMeta('property', 'og:site_name', SWAPIO.siteName);
-  setMeta('name', 'twitter:image', `${origin}${SWAPIO.logoPath}`);
+  setMeta('property', 'og:locale', 'en_US');
+  setMeta('name', 'twitter:image', `${origin}${SWAPIO.ogImagePath}`);
+  setMeta('name', 'keywords', SWAPIO.seoKeywords);
 
   let canonical = document.querySelector('link[rel="canonical"]');
   if (!canonical) {
@@ -126,11 +180,31 @@ function initSeo() {
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify({
       '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: SWAPIO.siteName,
-      url: origin,
-      email: SWAPIO.supportEmail,
-      description: 'Turn unused gift cards into cash. Get 95% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer.',
+      '@graph': [
+        {
+          '@type': 'WebSite',
+          name: SWAPIO.siteName,
+          url: origin,
+          description: 'Turn unused gift cards into cash. Get 95% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer.',
+          inLanguage: 'en-US',
+        },
+        {
+          '@type': 'Organization',
+          name: SWAPIO.siteName,
+          url: origin,
+          email: SWAPIO.supportEmail,
+          logo: `${origin}${SWAPIO.logoPath}`,
+          description: 'Turn unused gift cards into cash. Get 95% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer.',
+        },
+        {
+          '@type': 'Service',
+          name: 'Swapio Gift Card Exchange',
+          provider: { '@type': 'Organization', name: SWAPIO.siteName },
+          url: origin,
+          description: 'Sell unused gift cards for cash with 95% payout via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer.',
+          areaServed: 'US',
+        },
+      ],
     });
     document.head.appendChild(script);
   }
@@ -230,7 +304,12 @@ function getHeader(activePage = '') {
   return `
     <header class="site-header sticky top-0 z-50 bg-white transition-shadow duration-300">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 site-header-inner">
-        <div class="relative flex items-center justify-center h-16 md:h-18">
+        <div class="site-brand-row">
+          <a href="/" class="site-brand" aria-label="Swapio home">
+            <img src="${SWAPIO.logoPath}" alt="Swapio" class="site-logo" width="72" height="72">
+          </a>
+        </div>
+        <div class="relative flex items-center justify-center h-14 md:h-16">
           <nav class="hidden md:flex items-center gap-2 flex-wrap justify-center" aria-label="Main navigation">
             ${navLinks}
             <span class="auth-nav-slot inline-flex items-center gap-2">
