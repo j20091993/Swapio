@@ -169,14 +169,16 @@ def build_article_page(slug, article):
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{SITE}/assets/logo.png">
+  <meta property="og:image" content="{SITE}/assets/logo-512.png">
   <meta property="og:site_name" content="Swapio">
+  <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="{esc(title)}">
   <meta name="twitter:description" content="{esc(description)}">
-  <meta name="twitter:image" content="{SITE}/assets/logo.png">
-  <link rel="icon" href="/assets/logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/logo.png">
+  <meta name="twitter:image" content="{SITE}/assets/logo-512.png">
+  <link rel="icon" href="/assets/logo-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/assets/logo-180.png" type="image/png" sizes="180x180">
+  <link rel="apple-touch-icon" href="/assets/logo-180.png" sizes="180x180">
   <title>{esc(title)}</title>
   <script type="application/ld+json">{json.dumps(article_schema)}</script>
   <script id="swapio-org-schema" type="application/ld+json">{json.dumps(org_schema)}</script>
