@@ -178,7 +178,7 @@ def build_schemas(reviews: list[dict]) -> dict[Path, dict]:
                 "@type": "HowToStep",
                 "position": 4,
                 "name": "Get Paid",
-                "text": "Most swaps pay out within hours via your preferred method.",
+                "text": "Most swaps pay out within a day via your preferred method.",
             },
         ],
     }

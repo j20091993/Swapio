@@ -76,11 +76,11 @@ function generateSupportReply(message) {
   }
 
   if (includesAny(text, ['payout', 'paypal', 'cash app', 'zelle', 'venmo', 'bitcoin', 'bank transfer', 'ach', 'get paid', 'payment method'])) {
-    return `We support ${SWAPIO.payoutMethods.join(', ')}. Pick your preferred method when starting a swap — most payouts go through within a few hours after verification.`;
+    return `We support ${SWAPIO.payoutMethods.join(', ')}. Pick your preferred method when starting a swap — most payouts go through within a day after verification.`;
   }
 
   if (includesAny(text, ['how long', 'timing', 'time', 'hours', 'fast', 'speed', 'when do i get', 'wait', 'long does'])) {
-    return "Most swaps are verified and paid within hours. You'll get an order code (SWP-XXXXXX) right after submitting. Occasionally it can take up to 24 hours if verification needs a closer look.";
+    return "Most swaps are verified and paid within a day. You'll get an order code (SWP-XXXXXX) right after submitting. Occasionally it may take a little longer if verification needs a closer look.";
   }
 
   if (includesAny(text, ['safe', 'scam', 'legit', 'trust', 'secure', 'verify', 'verification'])) {
@@ -96,7 +96,7 @@ function generateSupportReply(message) {
   }
 
   if (includesAny(text, ['how does', 'how it work', 'how do i', 'process', 'steps', 'start', 'submit', 'swap'])) {
-    return 'Four steps: pick your brand and balance, see your 95% cash offer, submit card and payout details, then get paid after verification — usually within hours. Start on the homepage or at /sell-gift-card/.';
+    return 'Four steps: pick your brand and balance, see your 95% cash offer, submit card and payout details, then get paid after verification — usually within a day. Start on the homepage or at /sell-gift-card/.';
   }
 
   if (includesAny(text, ['order code', 'swp', 'track', 'reference', 'confirmation'])) {

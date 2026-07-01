@@ -5,7 +5,7 @@ const SWAPIO = {
   siteUrl: 'https://swapio.cc',
   logoPath: '/assets/logo.png',
   ogImagePath: '/assets/logo-512.png',
-  faviconPath: '/assets/favicon.ico',
+  faviconPath: '/assets/logo.png',
   appleTouchIconPath: '/assets/logo-180.png',
   supportEmail: 'support@swapio.cc',
 
@@ -110,7 +110,7 @@ const SWAPIO = {
       meta: 'Apple · Venmo',
     },
     {
-      text: 'Swapped two cards in one evening, a Steam card and a Walmart card. Same payout method for both, both paid out within hours. Simple and professional.',
+      text: 'Swapped two cards in one evening, a Steam card and a Walmart card. Same payout method for both, both paid out within a day. Simple and professional.',
       name: 'David L.',
       meta: 'Steam & Walmart · PayPal',
     },
@@ -517,7 +517,7 @@ function getTrustSignals() {
               <svg class="w-6 h-6 text-swapio-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
             <h3 class="font-semibold text-swapio-dark mb-2">Fast Payouts</h3>
-            <p class="text-gray-500 text-sm leading-relaxed">Most swaps are verified and paid within hours, not days.</p>
+            <p class="text-gray-500 text-sm leading-relaxed">Most swaps are verified and paid within a day.</p>
           </div>
           <div class="trust-card scroll-reveal scroll-reveal--card">
             <div class="w-12 h-12 rounded-2xl bg-swapio-light/20 flex items-center justify-center mb-4">
@@ -603,7 +603,7 @@ function getProcessSteps() {
           <div class="process-step scroll-reveal">
             <div class="step-number">4</div>
             <h3 class="font-semibold text-swapio-dark mb-2">Get Paid</h3>
-            <p class="text-gray-500 text-sm">We verify your card and send cash within hours.</p>
+            <p class="text-gray-500 text-sm">We verify your card and send cash within a day.</p>
           </div>
         </div>
         <div class="text-center mt-10">

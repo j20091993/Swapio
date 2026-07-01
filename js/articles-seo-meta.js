@@ -26,7 +26,7 @@ const ARTICLE_SEO = {
   'after-you-submit': {
     metaTitle: 'What Happens After You Submit a Gift Card Swap? | Swapio',
     metaDescription:
-      'Step-by-step guide to what happens after you submit a gift card on Swapio — from order code to verification and cash payout within hours.',
+      'Step-by-step guide to what happens after you submit a gift card on Swapio — from order code to verification and cash payout within a day.',
     relatedSlugs: ['how-long-do-payouts-take', 'payout-methods-compared', 'safely-sell-gift-cards-online'],
   },
   'declutter-gift-cards': {
@@ -62,7 +62,7 @@ const ARTICLE_SEO = {
   'how-long-do-payouts-take': {
     metaTitle: 'How Long Do Gift Card Payouts Take? | Swapio Timeline',
     metaDescription:
-      'Realistic timeline for Swapio gift card payouts — order code is instant, verification takes 1–4 hours, and PayPal, Venmo, and Zelle payouts follow quickly.',
+      'Realistic timeline for Swapio gift card payouts — order code is instant, verification typically completes within a day, and PayPal, Venmo, and Zelle payouts follow quickly.',
     relatedSlugs: ['after-you-submit', 'payout-methods-compared', 'venmo-bitcoin-payouts'],
   },
   'sell-steam-gift-card-for-cash': {

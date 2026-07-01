@@ -106,7 +106,7 @@ def process_steps() -> str:
     <li><strong>Choose Your Card</strong> — Search 60+ brands and enter your balance.</li>
     <li><strong>Get Your Offer</strong> — See your 95% cash payout before you submit.</li>
     <li><strong>Submit Details</strong> — Enter card and payout info securely.</li>
-    <li><strong>Get Paid</strong> — Most swaps pay out within hours.</li>
+    <li><strong>Get Paid</strong> — Most swaps pay out within a day.</li>
   </ol>
 </section>"""
 

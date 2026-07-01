@@ -14,7 +14,7 @@ const ARTICLES = {
       <p>When you swap a gift card for cash through Swapio, you receive real money via PayPal, Cash App, Zelle, or bank transfer. That cash works everywhere — groceries, bills, savings, or anything else. You're not locked into a single store or brand.</p>
 
       <h2>How Swapio makes it simple</h2>
-      <p>Pick your brand, enter the balance, and see your offer instantly. Our 5% service fee is shown upfront, so you always know exactly what you'll receive. Submit your card details, get an order code, and receive your payout within hours.</p>
+      <p>Pick your brand, enter the balance, and see your offer instantly. Our 5% service fee is shown upfront, so you always know exactly what you'll receive. Submit your card details, get an order code, and receive your payout within a day.</p>
 
       <h2>When it makes sense to swap</h2>
       <ul>
@@ -100,7 +100,7 @@ const ARTICLES = {
 
       <h2>PayPal</h2>
       <p><strong>Best for:</strong> People who already use PayPal for online purchases or freelancing.</p>
-      <p>PayPal is universal and well-established. Funds land in your PayPal balance, which you can transfer to your bank or spend directly. Most Swapio PayPal payouts arrive within a few hours.</p>
+      <p>PayPal is universal and well-established. Funds land in your PayPal balance, which you can transfer to your bank or spend directly. Most Swapio PayPal payouts arrive within a day.</p>
 
       <h2>Cash App</h2>
       <p><strong>Best for:</strong> Users who want money on a debit card quickly.</p>
@@ -112,7 +112,7 @@ const ARTICLES = {
 
       <h2>Bank Transfer (ACH)</h2>
       <p><strong>Best for:</strong> Maximum simplicity — money goes straight to your checking account.</p>
-      <p>Provide your routing and account numbers, and the payout deposits directly. ACH transfers typically take a few hours to one business day depending on your bank.</p>
+      <p>Provide your routing and account numbers, and the payout deposits directly. ACH transfers typically complete within one business day depending on your bank.</p>
 
       <h2>Our recommendation</h2>
       <p>Choose whichever method you already use daily. There's no fee difference on Swapio's end — your offer amount stays the same regardless of payout method.</p>
@@ -131,7 +131,7 @@ const ARTICLES = {
       <p>Instantly, you receive a unique order code in the format SWP-XXXXXX. Save this — it's your reference for support and tracking.</p>
 
       <h2>Step 2: Verification begins</h2>
-      <p>Our team verifies your gift card — checking the balance, confirming it's valid, and ensuring it hasn't been reported lost or stolen. This usually takes a few hours.</p>
+      <p>Our team verifies your gift card — checking the balance, confirming it's valid, and ensuring it hasn't been reported lost or stolen. This usually completes within a day.</p>
 
       <h2>Step 3: Payout processed</h2>
       <p>Once verified, we send your cash to the payout method and account details you provided. PayPal, Cash App, and Zelle payouts are typically fastest. Bank transfers may take slightly longer depending on your bank.</p>
@@ -145,8 +145,8 @@ const ARTICLES = {
       <h2>Timeline summary</h2>
       <ul>
         <li><strong>Order code:</strong> Instant</li>
-        <li><strong>Verification:</strong> 1–4 hours (most cases)</li>
-        <li><strong>Payout:</strong> Within hours of verification</li>
+        <li><strong>Verification:</strong> within a day (most cases)</li>
+        <li><strong>Payout:</strong> Within a day of verification</li>
       </ul>
     `,
   },
@@ -227,7 +227,7 @@ const ARTICLES = {
 
       <h2>Venmo payouts</h2>
       <p><strong>Best for:</strong> Anyone who already sends and receives money through Venmo daily.</p>
-      <p>When you select Venmo at checkout, you'll enter the phone number linked to your Venmo account. Once your gift card is verified, we send your payout directly to that number. Most Venmo transfers complete within a few hours of verification.</p>
+      <p>When you select Venmo at checkout, you'll enter the phone number linked to your Venmo account. Once your gift card is verified, we send your payout directly to that number. Most Venmo transfers complete within a day of verification.</p>
       <p>Double-check your phone number before submitting — a typo means a delay while we sort it out with you.</p>
 
       <h2>Bitcoin payouts</h2>
@@ -327,12 +327,12 @@ const ARTICLES = {
       <h2>Order code: instant</h2>
       <p>The moment you hit "Submit Swap," you receive your order code (SWP-XXXXXX). Save it — you'll need it if you contact support.</p>
 
-      <h2>Verification: 1–4 hours</h2>
-      <p>Our team checks that your card is valid, the balance matches, and it hasn't been reported lost or stolen. Most cards verify within a few hours. Complex cases or high balances may take slightly longer.</p>
+      <h2>Verification: within a day</h2>
+      <p>Our team checks that your card is valid, the balance matches, and it hasn't been reported lost or stolen. Most cards verify within a day. Complex cases or high balances may take slightly longer.</p>
 
       <h2>Payout by method</h2>
       <ul>
-        <li><strong>PayPal, Venmo, Cash App, Zelle:</strong> Usually within hours of verification</li>
+        <li><strong>PayPal, Venmo, Cash App, Zelle:</strong> Usually within a day of verification</li>
         <li><strong>Bitcoin:</strong> Sent after verification; blockchain confirmation time varies</li>
         <li><strong>Bank Transfer (ACH):</strong> Typically same day to one business day depending on your bank</li>
       </ul>
