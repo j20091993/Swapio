@@ -1,16 +1,16 @@
-/* Swapio — Fake live support chat (site-scoped assistant) */
+/* Swapio — AI support chatbot (site-scoped) */
 
 const SUPPORT_CHAT = {
-  agentName: 'Sophie R.',
-  agentFirstName: 'Sophie',
-  agentInitials: 'SR',
-  welcomeDelay: 900,
-  typingMin: 700,
-  typingMax: 1800,
+  agentName: 'Swapio AI',
+  agentLabel: 'AI Assistant',
+  welcomeDelay: 700,
+  typingMin: 600,
+  typingMax: 1600,
+  closeDuration: 320,
 };
 
 const OFF_TOPIC_REPLY =
-  "I can only help with general Swapio questions here — things like how swaps work, fees, and payout options. For personal order help, email support@swapio.cc with your order code (SWP-XXXXXX) and the team will take a look.";
+  "I can only help with general Swapio questions — how swaps work, fees, payout options, and accepted brands. For personal order help, email support@swapio.cc with your order code (SWP-XXXXXX).";
 
 function normalizeText(text) {
   return String(text)
@@ -31,10 +31,9 @@ function formatBrandList(limit = 12) {
 
 function generateSupportReply(message) {
   const text = normalizeText(message);
-  const { agentFirstName } = SUPPORT_CHAT;
 
   if (!text) {
-    return `Go ahead and ask — happy to help with anything about how Swapio works.`;
+    return 'Ask me anything about Swapio — payouts, fees, accepted brands, or how the swap process works.';
   }
 
   const personalPatterns = [
@@ -57,66 +56,66 @@ function generateSupportReply(message) {
   ];
 
   if (includesAny(text, offTopicPatterns)) {
-    return `I'm only able to help with Swapio — gift card swaps, payouts, fees, and that kind of thing. What would you like to know about the site?`;
+    return "I'm only able to answer questions about Swapio and gift card swaps. What would you like to know about the site?";
   }
 
   if (includesAny(text, ['hello', 'hi ', 'hey', 'good morning', 'good afternoon', 'good evening'])) {
-    return `Hey! I'm ${agentFirstName} from Swapio support. Ask me anything about how swaps work, payout options, fees, or accepted brands.`;
+    return "Hey! I'm Swapio AI. I can help with how swaps work, payout options, fees, and accepted brands — what can I help with?";
   }
 
   if (includesAny(text, ['thank', 'thanks', 'thx', 'appreciate'])) {
-    return `Of course! Let me know if anything else comes up. When you're ready, you can start a swap on the homepage or at /sell-gift-card/.`;
+    return "You're welcome! Let me know if anything else comes up. You can start a swap on the homepage or at /sell-gift-card/ whenever you're ready.";
   }
 
   if (includesAny(text, ['contact', 'email', 'reach', 'human', 'real person', 'talk to someone', 'speak to'])) {
-    return `You can reach the team at ${SWAPIO.supportEmail} or through our Reach Us page at /contact. If you have an active swap, include your order code (SWP-XXXXXX).`;
+    return `You can reach the team at ${SWAPIO.supportEmail} or through our Reach Us page at /contact. Include your order code (SWP-XXXXXX) if you have an active swap.`;
   }
 
   if (includesAny(text, ['fee', 'percent', '5%', '95%', 'how much', 'rate', 'offer', 'payout amount', 'cut', 'take'])) {
-    return `Swapio pays ${SWAPIO.payoutPercent}% of your card balance — there's a flat ${SWAPIO.serviceFeePercent}% service fee, and you see the exact amount before you submit. So a $100 card pays out $${SWAPIO.payoutPercent}.`;
+    return `Swapio pays ${SWAPIO.payoutPercent}% of your card balance — there's a flat ${SWAPIO.serviceFeePercent}% service fee shown upfront before you submit. A $100 card pays out $${SWAPIO.payoutPercent}.`;
   }
 
   if (includesAny(text, ['payout', 'paypal', 'cash app', 'zelle', 'venmo', 'bitcoin', 'bank transfer', 'ach', 'get paid', 'payment method'])) {
-    return `We offer ${SWAPIO.payoutMethods.join(', ')}. Pick whichever you prefer when you start a swap — most payouts go through within a few hours after verification.`;
+    return `We support ${SWAPIO.payoutMethods.join(', ')}. Pick your preferred method when starting a swap — most payouts go through within a few hours after verification.`;
   }
 
   if (includesAny(text, ['how long', 'timing', 'time', 'hours', 'fast', 'speed', 'when do i get', 'wait', 'long does'])) {
-    return `Most swaps are verified and paid within hours. You'll get an order code (SWP-XXXXXX) right after submitting so you can reference it. Occasionally it can take up to 24 hours if verification needs a closer look.`;
+    return "Most swaps are verified and paid within hours. You'll get an order code (SWP-XXXXXX) right after submitting. Occasionally it can take up to 24 hours if verification needs a closer look.";
   }
 
   if (includesAny(text, ['safe', 'scam', 'legit', 'trust', 'secure', 'verify', 'verification'])) {
-    return `Every card is verified before we send a payout, and all submissions go over encrypted HTTPS. Your exact cash offer is shown upfront — no surprises on the fee. We don't sell your personal info either.`;
+    return 'Every card is verified before payout. Submissions use encrypted HTTPS, your exact offer is shown upfront, and we do not sell your personal information.';
   }
 
   if (includesAny(text, ['minimum', 'maximum', 'limit', 'balance', '$10', '$5000', '10 dollar', '5000'])) {
-    return `We accept balances from $10 up to $5,000. Just enter your amount on the homepage and you'll see your exact offer before committing to anything.`;
+    return 'Accepted balances range from $10 to $5,000. Enter your amount on the homepage to see your exact offer before committing.';
   }
 
   if (includesAny(text, ['brand', 'accept', 'which card', 'what card', 'amazon', 'apple', 'steam', 'visa', 'gift card'])) {
-    return `We take 60+ brands — ${formatBrandList()}. You can search for yours on the homepage swap box to make sure it's listed.`;
+    return `We accept 60+ brands including ${formatBrandList()}. Search for yours on the homepage swap box to confirm it's listed.`;
   }
 
   if (includesAny(text, ['how does', 'how it work', 'how do i', 'process', 'steps', 'start', 'submit', 'swap'])) {
-    return `Pretty straightforward: pick your brand and balance, see your 95% cash offer, submit your card and payout details, then get paid after verification — usually within hours. You can start on the homepage or at /sell-gift-card/.`;
+    return 'Four steps: pick your brand and balance, see your 95% cash offer, submit card and payout details, then get paid after verification — usually within hours. Start on the homepage or at /sell-gift-card/.';
   }
 
   if (includesAny(text, ['order code', 'swp', 'track', 'reference', 'confirmation'])) {
-    return `After you submit, you'll get an order code like SWP-XXXXXX — hang onto that. For anything order-specific, email support@swapio.cc with the code and they'll help you out.`;
+    return "After submitting you'll get an order code like SWP-XXXXXX. For order-specific help, email support@swapio.cc with that code.";
   }
 
   if (includesAny(text, ['account', 'dashboard', 'log in', 'login', 'sign up', 'signup', 'register'])) {
-    return `You can create a free account to track submissions in your dashboard at /dashboard.html, but it's optional — you can swap without one and use your order code to follow up.`;
+    return 'You can create a free account to track submissions at /dashboard.html, but it is optional — you can swap without one and use your order code to follow up.';
   }
 
   if (includesAny(text, ['what is swapio', 'about swapio', 'who is swapio', 'swapio'])) {
-    return `Swapio lets you turn unused gift cards into real cash. You get ${SWAPIO.payoutPercent}% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer. We accept 60+ brands with transparent fees and fast payouts.`;
+    return `Swapio turns unused gift cards into real cash. You get ${SWAPIO.payoutPercent}% of your card value via PayPal, Cash App, Zelle, Venmo, Bitcoin, or bank transfer. 60+ brands, transparent fees, fast payouts.`;
   }
 
   if (includesAny(text, ['guide', 'faq', 'article', 'help'])) {
-    return `We've got a full Guide at /guide, an FAQ at /faq, and Articles at /articles/ if you want to dig deeper into selling gift cards safely and getting the best value.`;
+    return 'Check our Guide at /guide, FAQ at /faq, and Articles at /articles/ for more detail on selling gift cards safely.';
   }
 
-  return `Hmm, not totally sure on that one. I can help with how swaps work, payout methods, fees, timing, accepted brands, and safety. For order-specific stuff, email support@swapio.cc.`;
+  return "I'm not sure about that one. I can help with swaps, payout methods, fees, timing, accepted brands, and safety. For order-specific help, email support@swapio.cc.";
 }
 
 function getSupportChatHtml() {
@@ -128,7 +127,7 @@ function getSupportChatHtml() {
         class="support-chat-toggle"
         aria-expanded="false"
         aria-controls="support-chat-panel"
-        aria-label="Open support chat"
+        aria-label="Open AI chat"
       >
         <svg class="support-chat-toggle-icon support-chat-toggle-icon--open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
@@ -139,13 +138,17 @@ function getSupportChatHtml() {
         <span class="support-chat-toggle-pulse" aria-hidden="true"></span>
       </button>
 
-      <div id="support-chat-panel" class="support-chat-panel hidden" role="dialog" aria-label="Swapio support chat">
+      <div id="support-chat-panel" class="support-chat-panel" role="dialog" aria-label="Swapio AI chat" aria-hidden="true">
         <div class="support-chat-header">
           <div class="support-chat-header-info">
-            <div class="support-chat-avatar" aria-hidden="true">${SUPPORT_CHAT.agentInitials}</div>
+            <div class="support-chat-avatar support-chat-avatar--ai" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" width="18" height="18">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714a2.25 2.25 0 00.659 1.591L19 14.5M14.25 3.104c.251.023.501.05.75.082M19 14.5l-2.47 2.47a2.25 2.25 0 01-1.59.659H9.06a2.25 2.25 0 01-1.591-.659L5 14.5m14 0V17a2 2 0 01-2 2H7a2 2 0 01-2-2v-2.5"/>
+              </svg>
+            </div>
             <div>
-              <p class="support-chat-agent">${SUPPORT_CHAT.agentName}</p>
-              <p class="support-chat-status"><span class="support-chat-online-dot" aria-hidden="true"></span> Online now</p>
+              <p class="support-chat-agent">${SUPPORT_CHAT.agentName} <span class="support-chat-ai-badge">AI</span></p>
+              <p class="support-chat-status"><span class="support-chat-online-dot" aria-hidden="true"></span> ${SUPPORT_CHAT.agentLabel}</p>
             </div>
           </div>
           <button type="button" id="support-chat-close" class="support-chat-close" aria-label="Close chat">
@@ -162,7 +165,7 @@ function getSupportChatHtml() {
             type="text"
             id="support-chat-input"
             class="support-chat-input"
-            placeholder="Type a message..."
+            placeholder="Ask Swapio AI..."
             autocomplete="off"
             maxlength="500"
             aria-label="Message"
@@ -185,7 +188,7 @@ function appendChatMessage(container, { text, sender, isTyping = false }) {
   if (isTyping) {
     row.innerHTML = `
       <div class="support-chat-bubble support-chat-bubble--agent">
-        <span class="support-chat-typing" aria-label="${SUPPORT_CHAT.agentFirstName} is typing">
+        <span class="support-chat-typing" aria-label="Swapio AI is typing">
           <span></span><span></span><span></span>
         </span>
       </div>
@@ -213,25 +216,66 @@ function randomTypingDelay() {
   return SUPPORT_CHAT.typingMin + Math.random() * (SUPPORT_CHAT.typingMax - SUPPORT_CHAT.typingMin);
 }
 
-function setChatOpen(isOpen) {
-  const toggle = document.getElementById('support-chat-toggle');
-  const panel = document.getElementById('support-chat-panel');
-  const iconOpen = toggle?.querySelector('.support-chat-toggle-icon--open');
-  const iconClose = toggle?.querySelector('.support-chat-toggle-icon--close');
-  if (!toggle || !panel) return;
+let chatAnimating = false;
 
-  panel.classList.toggle('hidden', !isOpen);
-  panel.classList.toggle('support-chat-panel--open', isOpen);
+function updateChatToggleUi(isOpen) {
+  const toggle = document.getElementById('support-chat-toggle');
+  if (!toggle) return;
+
+  const iconOpen = toggle.querySelector('.support-chat-toggle-icon--open');
+  const iconClose = toggle.querySelector('.support-chat-toggle-icon--close');
+  const pulse = toggle.querySelector('.support-chat-toggle-pulse');
+
   toggle.classList.toggle('support-chat-toggle--active', isOpen);
   toggle.setAttribute('aria-expanded', String(isOpen));
-  toggle.setAttribute('aria-label', isOpen ? 'Close support chat' : 'Open support chat');
+  toggle.setAttribute('aria-label', isOpen ? 'Close AI chat' : 'Open AI chat');
   iconOpen?.classList.toggle('hidden', isOpen);
   iconClose?.classList.toggle('hidden', !isOpen);
-  toggle.querySelector('.support-chat-toggle-pulse')?.classList.toggle('hidden', isOpen);
+  pulse?.classList.toggle('hidden', isOpen);
+}
+
+function setChatOpen(isOpen) {
+  const panel = document.getElementById('support-chat-panel');
+  if (!panel || chatAnimating) return;
+
+  const isCurrentlyOpen = panel.classList.contains('support-chat-panel--open');
+  if (isOpen === isCurrentlyOpen) return;
 
   if (isOpen) {
-    document.getElementById('support-chat-input')?.focus();
+    panel.classList.remove('support-chat-panel--closing');
+    panel.setAttribute('aria-hidden', 'false');
+    updateChatToggleUi(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        panel.classList.add('support-chat-panel--open');
+      });
+    });
+    setTimeout(() => document.getElementById('support-chat-input')?.focus(), 360);
+    return;
   }
+
+  chatAnimating = true;
+  updateChatToggleUi(false);
+  panel.classList.remove('support-chat-panel--open');
+  panel.classList.add('support-chat-panel--closing');
+
+  let finished = false;
+  const finishClose = () => {
+    if (finished) return;
+    finished = true;
+    panel.classList.remove('support-chat-panel--closing');
+    panel.setAttribute('aria-hidden', 'true');
+    chatAnimating = false;
+  };
+
+  const onEnd = (event) => {
+    if (event.target !== panel || event.propertyName !== 'opacity') return;
+    panel.removeEventListener('transitionend', onEnd);
+    finishClose();
+  };
+
+  panel.addEventListener('transitionend', onEnd);
+  setTimeout(finishClose, SUPPORT_CHAT.closeDuration + 100);
 }
 
 function initSupportChat() {
@@ -239,6 +283,7 @@ function initSupportChat() {
 
   document.body.insertAdjacentHTML('beforeend', getSupportChatHtml());
 
+  const root = document.getElementById('support-chat-root');
   const toggle = document.getElementById('support-chat-toggle');
   const closeBtn = document.getElementById('support-chat-close');
   const panel = document.getElementById('support-chat-panel');
@@ -249,6 +294,8 @@ function initSupportChat() {
   let welcomed = false;
   let responding = false;
 
+  const isOpen = () => panel.classList.contains('support-chat-panel--open');
+
   const sendAgentReply = (text) => {
     const typingRow = appendChatMessage(messages, { sender: 'agent', isTyping: true });
 
@@ -257,7 +304,7 @@ function initSupportChat() {
       appendChatMessage(messages, { sender: 'agent', text });
       responding = false;
       input.disabled = false;
-      input.focus();
+      if (isOpen()) input.focus();
     }, randomTypingDelay());
   };
 
@@ -270,33 +317,42 @@ function initSupportChat() {
     input.disabled = true;
     responding = true;
 
-    const reply = generateSupportReply(trimmed);
-    sendAgentReply(reply);
+    sendAgentReply(generateSupportReply(trimmed));
   };
 
   const maybeWelcome = () => {
     if (welcomed) return;
     welcomed = true;
     setTimeout(() => {
-      sendAgentReply(`Hey there! I'm ${SUPPORT_CHAT.agentFirstName} — happy to help with any Swapio questions. What's on your mind?`);
+      sendAgentReply("Hi! I'm Swapio AI — ask me anything about how swaps work, payout methods, fees, or accepted brands.");
     }, SUPPORT_CHAT.welcomeDelay);
   };
 
-  toggle?.addEventListener('click', () => {
-    const isOpen = panel?.classList.contains('support-chat-panel--open');
-    setChatOpen(!isOpen);
-    if (!isOpen) maybeWelcome();
+  toggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const willOpen = !isOpen();
+    setChatOpen(willOpen);
+    if (willOpen) maybeWelcome();
   });
 
-  closeBtn?.addEventListener('click', () => setChatOpen(false));
+  closeBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setChatOpen(false);
+  });
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     handleUserMessage(input.value);
   });
 
+  document.addEventListener('click', (e) => {
+    if (!isOpen()) return;
+    if (root?.contains(e.target)) return;
+    setChatOpen(false);
+  });
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && panel?.classList.contains('support-chat-panel--open')) {
+    if (e.key === 'Escape' && isOpen()) {
       setChatOpen(false);
     }
   });
