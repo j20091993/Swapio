@@ -293,6 +293,23 @@ function isValidSwapSession(saved) {
   return true;
 }
 
+function getSiteLogoHtml({ size = 'hero', link = true } = {}) {
+  const sizeClass = size === 'header' ? 'site-logo' : 'swapio-logo';
+  const img = `<img src="${SWAPIO.appleTouchIconPath}" alt="${SWAPIO.siteName}" class="${sizeClass}" width="${size === 'header' ? 40 : 64}" height="${size === 'header' ? 40 : 64}">`;
+  if (!link) return img;
+  return `<a href="/" class="site-brand" aria-label="${SWAPIO.siteName} home">${img}</a>`;
+}
+
+function injectPageLogos() {
+  document.querySelectorAll('.page-hero > div').forEach((container) => {
+    if (container.querySelector('.swapio-logo, .hero-logo-wrap')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'hero-logo-wrap';
+    wrap.innerHTML = getSiteLogoHtml();
+    container.insertBefore(wrap, container.firstChild);
+  });
+}
+
 function getHeader(activePage = '') {
   const navItems = [
     { href: '/', label: 'Home', id: 'home' },
@@ -725,17 +742,36 @@ function initPageAnimations() {
   });
 }
 
+function loadSupportChat() {
+  if (typeof initSupportChat === 'function') {
+    initSupportChat();
+    return;
+  }
+
+  if (document.querySelector('script[data-support-chat]')) return;
+
+  const script = document.createElement('script');
+  script.src = '/js/support-chat.js';
+  script.dataset.supportChat = 'true';
+  script.onload = () => {
+    if (typeof initSupportChat === 'function') initSupportChat();
+  };
+  document.body.appendChild(script);
+}
+
 function initLayout(activePage = '') {
   const headerEl = document.getElementById('site-header');
   const footerEl = document.getElementById('site-footer');
   if (headerEl) headerEl.innerHTML = getHeader(activePage);
   if (footerEl) footerEl.innerHTML = getFooter();
+  injectPageLogos();
   initSeo();
   initMobileMenu();
   initHeaderScroll();
   initPageAnimations();
   initScrollReveal();
   scrollToHashTarget();
+  loadSupportChat();
   if (typeof initAuth === 'function') {
     initAuth();
   } else {
