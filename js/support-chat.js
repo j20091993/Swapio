@@ -7,11 +7,6 @@ const SUPPORT_CHAT = {
   typingMin: 500,
   typingMax: 2200,
   closeDuration: 320,
-  suggestions: [
-    'Is Swapio legit?',
-    'How much will I get?',
-    'What cards do you accept?',
-  ],
 };
 
 const OFF_TOPIC_REPLY =
@@ -844,8 +839,6 @@ function getSupportChatHtml() {
 
         <div id="support-chat-messages" class="support-chat-messages" role="log" aria-relevant="additions"></div>
 
-        <div id="support-chat-suggestions" class="support-chat-suggestions" hidden></div>
-
         <form id="support-chat-form" class="support-chat-form">
           <input
             type="text"
@@ -873,7 +866,7 @@ function appendChatMessage(container, { text, sender, isTyping = false }) {
 
   if (isTyping) {
     row.innerHTML = `
-      <div class="support-chat-bubble support-chat-bubble--agent">
+      <div class="support-chat-bubble support-chat-bubble--agent support-chat-bubble--typing">
         <span class="support-chat-typing" aria-label="Swapio AI is typing">
           <span></span><span></span><span></span>
         </span>
@@ -897,29 +890,6 @@ function escapeChatHtml(text) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/\n/g, '<br>');
-}
-
-function renderSuggestions(container, onSelect) {
-  if (!container || chatState.userMessageCount > 0) {
-    container.hidden = true;
-    container.innerHTML = '';
-    return;
-  }
-
-  container.hidden = false;
-  container.innerHTML = SUPPORT_CHAT.suggestions
-    .map(
-      (label) =>
-        `<button type="button" class="support-chat-suggestion" data-suggestion="${label.replace(/"/g, '&quot;')}">${escapeChatHtml(label)}</button>`
-    )
-    .join('');
-
-  container.querySelectorAll('[data-suggestion]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const value = button.getAttribute('data-suggestion');
-      if (value) onSelect(value);
-    });
-  });
 }
 
 let chatAnimating = false;
@@ -994,7 +964,6 @@ function initSupportChat() {
   const closeBtn = document.getElementById('support-chat-close');
   const panel = document.getElementById('support-chat-panel');
   const messages = document.getElementById('support-chat-messages');
-  const suggestions = document.getElementById('support-chat-suggestions');
   const form = document.getElementById('support-chat-form');
   const input = document.getElementById('support-chat-input');
 
@@ -1011,7 +980,6 @@ function initSupportChat() {
       appendChatMessage(messages, { sender: 'agent', text });
       responding = false;
       input.disabled = false;
-      renderSuggestions(suggestions, handleUserMessage);
       if (isOpen()) input.focus();
     }, getTypingDelay(text));
   };
@@ -1024,7 +992,6 @@ function initSupportChat() {
     input.value = '';
     input.disabled = true;
     responding = true;
-    renderSuggestions(suggestions, handleUserMessage);
 
     sendAgentReply(generateSupportReply(trimmed));
   };
@@ -1034,12 +1001,10 @@ function initSupportChat() {
     welcomed = true;
     setTimeout(() => {
       sendAgentReply(
-        "Hi! I'm Swapio AI. Ask me about fees, payout methods, accepted brands, timing, or whether Swapio is legit — I'm here to help."
+        "Hi! I'm Swapio AI — ask me about fees, payout methods, accepted brands, or how swaps work."
       );
     }, SUPPORT_CHAT.welcomeDelay);
   };
-
-  renderSuggestions(suggestions, handleUserMessage);
 
   toggle?.addEventListener('click', (e) => {
     e.stopPropagation();
