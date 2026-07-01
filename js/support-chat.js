@@ -147,7 +147,7 @@ function getSupportChatHtml() {
               </svg>
             </div>
             <div>
-              <p class="support-chat-agent">${SUPPORT_CHAT.agentName} <span class="support-chat-ai-badge">AI</span></p>
+              <p class="support-chat-agent">${SUPPORT_CHAT.agentName}</p>
               <p class="support-chat-status"><span class="support-chat-online-dot" aria-hidden="true"></span> ${SUPPORT_CHAT.agentLabel}</p>
             </div>
           </div>
